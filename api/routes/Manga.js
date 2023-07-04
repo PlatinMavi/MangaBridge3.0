@@ -21,7 +21,7 @@ router.get("/:name", async (req, res)=>{
         const name = req.params.name
         const MangaQuery = await MangaModel.findOne({browser:name})
         const id = MangaQuery._id
-        const update = await MangaModel.findByIdAndUpdate({id, view:MangaQuery.view+1})
+        const update = await MangaModel.findByIdAndUpdate(id, {view:MangaQuery.view+1})
         console.log(update)
         res.json(update)
 
