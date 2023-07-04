@@ -5,7 +5,8 @@ const MangaSchema = new mongoose.Schema({
     image:{type:String},
     desc:{type:String},
     category:{type:[String]},
-    view:{type:Number, default:0,}
+    view:{type:Number, default:0,},
+    browser:{type:String}
 }, { timestamps: true })
 
 const MangaModel = mongoose.model("Manga", MangaSchema)

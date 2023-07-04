@@ -8,11 +8,21 @@ router.get("/all", async (req,res) =>{
     res.json(all)
 })
 
+router.get("/topfive", async (req,res)=>{
+    const topfive = await MangaModel.find({}).sort({view:-1}).limit(5) 
+    res.json(topfive)
+})
+
+// router.get("")
+
 router.get("/:name", async (req, res)=>{
-    const name = req.params.name
+    
     try {
-        const MangaQuery = await MangaModel.findOne({name:name})
-        const update = await MangaModel.findOneAndUpdate({name:name, view:MangaQuery.view+1})
+        const name = req.params.name
+        const MangaQuery = await MangaModel.findOne({browser:name})
+        const id = MangaQuery._id
+        const update = await MangaModel.findByIdAndUpdate({id, view:MangaQuery.view+1})
+        console.log(update)
         res.json(update)
 
     } catch (error) {
@@ -21,9 +31,9 @@ router.get("/:name", async (req, res)=>{
 })
 
 router.post("/add", async (req, res)=>{
-    const {Name,Img,Desc,Categorys} = req.body
+    const {Name,Img,Desc,Categorys,Browser} = req.body
     try {
-        const MangaDoc = await MangaModel.create({name:Name,image:Img,desc:Desc,category:Categorys})
+        const MangaDoc = await MangaModel.create({name:Name,image:Img,desc:Desc,category:Categorys,browser:Browser})
         console.log(MangaDoc)
         res.json("ok")
     } catch (error) {

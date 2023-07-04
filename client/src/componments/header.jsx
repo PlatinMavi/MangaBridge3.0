@@ -44,7 +44,7 @@ export default function Header(){
                         <Link to="/register" className="register ">Register</Link>
                     </>
                 )}
-                <Link to="/add" className="logo">manga add</Link>
+                <Link to="/add" className="logo">Admin</Link>
             </nav>
       </header>
     )

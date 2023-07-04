@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import Header from "../componments/header"
 
 export default function MangaPage(){
     const [Manga, setManga] = useState("")
@@ -13,6 +14,10 @@ export default function MangaPage(){
     },[])
 
     return(
-        <h1>{Manga.name}</h1>
+        <div className="bg-slate-900 min-h-screen text-white">
+            <Header />
+            <h1>{Manga.name}</h1>
+        </div>
+        
     )
 }

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
-export default function Manga({name,desc,image,category}){
+export default function Manga({_id,name,desc,image,category,browser}){
     return(
-        <Link to={`/manga/${name}`}>
+        <Link to={`/manga/${browser}`}>
             <div className="p-4 bg-gray-800 w-max max-w-xs">
                 <h1>{name}</h1>
                 <h1>{desc}</h1>

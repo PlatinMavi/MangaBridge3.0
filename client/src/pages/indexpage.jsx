@@ -4,7 +4,7 @@ import Manga from "../componments/manga"
 
 
 export default function IndexPage(){
-  const [manga, setManga] = useState([])
+  const [Mmanga, setManga] = useState([])
   
   useEffect( () => {
       fetch("http://localhost:4000/manga/all",{
@@ -18,9 +18,9 @@ export default function IndexPage(){
       <main className='bg-slate-900 min h-screen text-white'>
         <Header />
         <div className="container flex gap-4 my-12 mx-auto ">
-          {manga.length > 0 && manga.map(manga =>(
+          {Mmanga.length > 0 && Mmanga.map(manga =>(
             
-              <Manga key={manga} {...manga} />
+              <Manga key={manga._id} {...manga} />
             
           ))}
         </div>  
