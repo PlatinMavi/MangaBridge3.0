@@ -9,9 +9,10 @@ export default function Header(){
     useEffect(() =>{
       fetch('http://localhost:4000/profile', {
         credentials: 'include',
+        headers: {'Content-Type':'application/json'},
       }).then(response => {
-        response.json().then(userInfo => {
-          setUserInfo(userInfo);
+        response.json().then(userinfo => {
+          setUserInfo(userinfo);
         });
       });
     }, []);
@@ -26,7 +27,7 @@ export default function Header(){
       ;
     }
   
-    const username = userInfo?.username;
+    const username = userInfo?.usernameStabilazed;
 
     return(
         <header className=' flex justify-between font-bold text-2xl text-white  p-4 bg-slate-800 '>

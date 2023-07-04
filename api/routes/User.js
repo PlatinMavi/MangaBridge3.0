@@ -10,7 +10,7 @@ router.post("/login", async(req,res)=>{
     const {username, password} = req.body
     const passwordStabilazed = password
     const usernameStabilazed = username
-    const Userdoc = await UserModel.findOne({usernameStabilazed})
+    const Userdoc = await UserModel.findOne({username:usernameStabilazed})
 
     if(Userdoc === null){
         res.json({msg:"invalid Username"})
@@ -43,16 +43,12 @@ router.post("/register", async(req,res)=>{
 router.post("/logout", (req,res)=>{
     res.cookie("token","").json({msg:"cookie has been reseted"})
 })
-router.get("/profile", (req,res)=>{
-    try{
-        const {token} = req.cookies
-        jwt.verify(token,JWTsecret, {}, (err,info)=>{
-        if(err){}
-        else{res.json(info)}
-    })
-    }catch(err){
-        res.json(err)
-    }
-})
+router.get('/profile', (req,res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, JWTsecret, {}, (err,info) => {
+      if (err){res.status(400).json("")};
+      res.json(info);
+    });
+  });
 
 module.exports = router
