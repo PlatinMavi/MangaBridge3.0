@@ -42,9 +42,11 @@ export default function Header(){
                     <>
                         <Link to="/login" className="login ">Login</Link>
                         <Link to="/register" className="register ">Register</Link>
+                        
                     </>
                 )}
                 <Link to="/add" className="logo">Admin</Link>
+                <Link to="/manga">MangaAll</Link>
             </nav>
       </header>
     )

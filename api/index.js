@@ -14,9 +14,11 @@ app.use(cookieParser())
 
 const userRoutes = require("./routes/User")
 const mangaRoutes = require("./routes/Manga")
+const chapterRoutes  = require("./routes/Chapter")
 
 app.use("/",userRoutes)
 app.use("/manga", mangaRoutes)
+app.use("/chapter", chapterRoutes)
 
 mongoose.connect(process.env.DB_URI)
 const connection = mongoose.connection

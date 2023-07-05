@@ -7,6 +7,7 @@ import  {Route,Routes} from "react-router-dom"
 import { UserContextProvider } from './usercontext';
 import MangaAdd from './pages/mangaAdd';
 import MangaPage from './pages/mangapage';
+import AllManga from './pages/allManga';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path={"/register"} element={<RegisterPage/>} />
 
         <Route path={"/manga/:name"} element={<MangaPage/>} />
+
+        <Route path={"/manga"} element={<AllManga/>} />
 
       </Routes>
     </UserContextProvider>
