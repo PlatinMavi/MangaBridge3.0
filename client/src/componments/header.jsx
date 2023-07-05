@@ -30,8 +30,8 @@ export default function Header(){
     const username = userInfo?.usernameStabilazed;
 
     return(
-        <header className=' flex justify-between font-bold text-2xl text-white  p-4 bg-slate-800 '>
-            <Link to="/" className="logo">MangBridge</Link>
+        <header className=' flex justify-between font-bold text-xl text-white  p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
+            <Link to="/" className="logo">MangaBridge</Link>
             <nav className=' flex gap-4'>
                 {username && (
                     <>
@@ -47,6 +47,7 @@ export default function Header(){
                 )}
                 <Link to="/add" className="logo">Admin</Link>
                 <Link to="/manga">MangaAll</Link>
+                <Link to="/chapter">ChapterAll</Link>
             </nav>
       </header>
     )

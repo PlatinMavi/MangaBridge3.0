@@ -42,4 +42,42 @@ router.get("/relevant/:id", async (req,res) =>{
     res.json(chapters)
 })
 
+router.get("/lastup", async (req , res)=>{
+    const page = parseInt(req.query.page || "0")
+    const LIMIT = (2)
+
+    const totalPages = await calculateTotalPages(LIMIT)
+    const all = await ChapterModel.aggregate([
+        { $sort: { createdAt: -1 } },
+        { $skip: 1 * page },
+        { $limit: LIMIT },
+            {
+                $lookup: {
+                    from: 'mangas', // Use the actual name of the 'mangas' collection
+                    localField: 'manga',
+                    foreignField: '_id',
+                    as: 'manga'
+                }
+            },
+        { $unwind: '$manga' },
+      ])
+
+    res.json({all, totalPages})
+})
+
+
+// FUNCTIONSSSSSS
+
+async function calculateTotalPages(page) {
+    try {
+      const totalDocuments = await ChapterModel.countDocuments({});
+      const totalPages = Math.ceil(totalDocuments / page);
+      return totalPages;
+    } catch (error) {
+      // Handle the error if necessary
+      console.error("Error calculating total pages:", error);
+      return 0; // Default value or error handling as needed
+    }
+  }
+
 module.exports = router

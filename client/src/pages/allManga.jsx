@@ -34,19 +34,20 @@ export default function AllManga(){
     }
 
     return(
-        <main className='bg-slate-900 min h-screen text-white'>
+        <main className=' min h-screen text-white'>
             <Header />
-            <div className="container flex gap-4 my-12 mx-auto ">
+            <div className="container flex gap-24 my-12 mx-auto ">
                 {Mmanga.length > 0 && Mmanga.map(manga =>(
             
                    <Manga key={manga._id} {...manga} />
             
                 ))}
-                {total > page &&(
-                    <button onClick={GetMore}>Load more</button>
-                )}
+                
                 
             </div>  
+            {total > page &&(
+                    <button onClick={GetMore}>Load more</button>
+                )}
         </main>
     )
 }
