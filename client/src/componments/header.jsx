@@ -30,7 +30,7 @@ export default function Header(){
     const username = userInfo?.usernameStabilazed;
 
     return(
-        <header className=' flex justify-between font-bold text-xl text-white  p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
+        <header className=' flex justify-between font-bold text-xl text-white sticky top-0  p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
             <Link to="/" className="logo">MangaBridge</Link>
             <nav className=' flex gap-4'>
                 {username && (
