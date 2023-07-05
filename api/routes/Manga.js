@@ -18,7 +18,7 @@ router.get("/all", async (req,res) =>{
 })
 
 router.get("/topfive", async (req,res)=>{
-    const topfive = await MangaModel.find({}).sort({view:-1}).limit(5) 
+    const topfive = await MangaModel.find({}).sort({view:-1}).limit(4) 
     res.json(topfive)
 })
 
