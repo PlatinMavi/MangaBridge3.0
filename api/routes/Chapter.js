@@ -16,22 +16,31 @@ router.get("/lasttw", async (req, res) => {
     try {
         const latestChapters = await ChapterModel.aggregate([
             { $sort: { createdAt: -1 } },
-            { $group: { _id: "$manga", chapter: { $first: "$$ROOT" } } },
+            {
+                $group: {
+                _id: "$manga",
+                chapter: { $first: "$$ROOT" },
+                },
+            },
             { $sort: { "chapter.createdAt": -1 } }, // Sort by createdAt within each group
             { $replaceRoot: { newRoot: "$chapter" } },
             {
                 $lookup: {
-                from: 'mangas',
-                localField: 'manga',
-                foreignField: '_id',
-                as: 'manga'
-                }
+                from: "mangas",
+                localField: "manga",
+                foreignField: "_id",
+                as: "manga",
+                },
             },
-            { $unwind: '$manga' },
-            { $limit: 20 }
+            { $unwind: "$manga" },
+            { $limit: 19 },
         ]);
 
-        res.json(latestChapters);
+        const sortedChapters = latestChapters.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+      
+          res.json(sortedChapters)
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while fetching the latest chapters.' });
@@ -40,13 +49,17 @@ router.get("/lasttw", async (req, res) => {
 
 router.get("/relevant/:id", async (req,res) =>{
     const manga = req.params.id
-    const chapters = await ChapterModel.find({manga:manga}) 
-    res.json(chapters)
+    const chapters = await ChapterModel.find({manga:manga}).sort({number:-1})
+
+    const count = await ChapterModel.findOne({manga:manga}).sort({number:-1})
+    const fansubs = await ChapterModel.find({manga:manga}).distinct("fansub")
+    
+    res.json({chapters, count:count.number, fansubs})
 })
 
 router.get("/lastup", async (req , res)=>{
     const page = parseInt(req.query.page || "0")
-    const LIMIT = (5)
+    const LIMIT = (20)
 
     const totalPages = await calculateTotalPages(LIMIT)
     const all = await ChapterModel.aggregate([

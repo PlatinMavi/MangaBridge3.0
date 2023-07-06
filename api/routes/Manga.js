@@ -4,7 +4,7 @@ const MangaModel = require("../models/Manga.model")
 
 
 router.get("/all/page", async (req,res) =>{
-    const LIMIT = 1
+    const LIMIT = 20
     const page = parseInt(req.query.page || "0")
     
     const totalPages = await calculateTotalPages(LIMIT)

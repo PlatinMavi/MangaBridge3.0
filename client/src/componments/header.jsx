@@ -31,12 +31,14 @@ export default function Header(){
     const username = userInfo?.usernameStabilazed;
 
     return(
-        <header className=' flex justify-between font-bold text-xl text-white sticky top-0  p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
+        <header className=' flex justify-between font-bold text-xl z-50 text-white sticky top-0  p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
             <Link to="/" className="logo">MangaBridge</Link>
             <nav className=' flex gap-4'>
-              <SearchBar/>
+              
 
-              <Link to="/manga">Seriler</Link>
+              <Link to="/manga" className="border px-2 rounded-xl">Seriler</Link>
+              <Link to="/chapter" className="border px-2 rounded-xl">Yeni Eklenenler</Link>
+              <SearchBar/>
 
                 {username && (
                     <>

@@ -74,7 +74,7 @@ export default function IndexPage(){
             <div className="container p-4 mx-auto mt-12 ">
                 <h3 className="text-4xl font-mono font-bold my-4">Son Yüklemeler:</h3>
                 <div className="flex flex-wrap -translate-x-16 gap-y-4 gap-x-24">
-                  <Link to="/chapter" className="bg-white bg-opacity-5 backdrop-blur-xs h-64 text-3xl break-words text-center font-mono p-4 rounded-3xl w-80  drop-shadow-lg translate-x-16" >
+                  <Link to="/chapter" className="bg-white shadow-xl bg-opacity-5 backdrop-blur-xs h-64 text-3xl break-words text-center font-mono p-4 rounded-3xl w-64  drop-shadow-lg translate-x-16" >
                     <p className="mt-12">Bana Tüm Son Yüklemeleri Göster</p>
                   </Link>
                   {lasttw.length > 0 && lasttw.map(manga =>(

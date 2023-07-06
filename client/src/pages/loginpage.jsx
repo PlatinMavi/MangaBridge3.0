@@ -33,7 +33,7 @@ export default function LoginPage(){
     return <Navigate to={'/'} />}
 
     return(
-        <main className='bg-slate-900 text-white h-screen'>
+        <main className=' text-white h-screen'>
           <Header/>
           <div className="container mt-12 mx-auto ">
             <form onSubmit={login} className="w-max mx-auto p-12 flex flex-col gap-4 bg-slate-800 rounded-3xl">
