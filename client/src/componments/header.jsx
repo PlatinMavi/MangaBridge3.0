@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useEffect} from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../usercontext";
+import SearchBar from "./search";
 
 export default function Header(){
 
@@ -33,6 +34,10 @@ export default function Header(){
         <header className=' flex justify-between font-bold text-xl text-white sticky top-0  p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
             <Link to="/" className="logo">MangaBridge</Link>
             <nav className=' flex gap-4'>
+              <SearchBar/>
+
+              <Link to="/manga">Seriler</Link>
+
                 {username && (
                     <>
                         <div onClick={logout} className="logout cursor-pointer">Logout</div>
@@ -45,9 +50,14 @@ export default function Header(){
                         
                     </>
                 )}
-                <Link to="/add" className="logo">Admin</Link>
-                <Link to="/manga">MangaAll</Link>
-                <Link to="/chapter">ChapterAll</Link>
+                {username==="admin" && (
+                    <>
+                        <Link to="/add" className="logo">Admin</Link>
+                    </>
+                )}
+                
+                
+
             </nav>
       </header>
     )

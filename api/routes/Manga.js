@@ -8,8 +8,19 @@ router.get("/all/page", async (req,res) =>{
     const page = parseInt(req.query.page || "0")
     
     const totalPages = await calculateTotalPages(LIMIT)
-    const all = await MangaModel.find().limit(LIMIT).skip(1*page)
+    const all = await MangaModel.find().limit(LIMIT).skip(LIMIT*page)
     res.json({all,totalPages})
+})
+
+router.get("/search", async (req, res) =>{
+    try {
+        const key = req.query.key
+        const result = await MangaModel.find({name:{ $regex: key, $options: 'i' }}).limit(4)
+        res.json(result)
+
+    } catch (error) {
+        res.json(error)
+    }
 })
 
 router.get("/all", async (req,res) =>{
@@ -48,6 +59,8 @@ router.post("/add", async (req, res)=>{
         res.json(error)
     }
 })
+
+
 
 // FUNCTIONSSSSS
 

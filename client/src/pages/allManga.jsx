@@ -34,9 +34,10 @@ export default function AllManga(){
     }
 
     return(
-        <main className=' min h-screen text-white'>
+        <main className=' font-mono text-white'>
             <Header />
-            <div className="container flex gap-24 my-12 mx-auto ">
+            <h1 className="text-6xl w-max mx-auto mt-8 font-bold">Bütün Mangalar</h1>
+            <div className="container flex flex-wrap gap-x-24 gap-y-4 my-12 mx-auto ">
                 {Mmanga.length > 0 && Mmanga.map(manga =>(
             
                    <Manga key={manga._id} {...manga} />
@@ -45,9 +46,11 @@ export default function AllManga(){
                 
                 
             </div>  
-            {total > page &&(
-                    <button onClick={GetMore}>Load more</button>
+            <div className="flex justify-center my-8">
+                {total > page &&(
+                    <button onClick={GetMore} className="w-1/2 bg-white bg-opacity-5 backdrop-blur-sm border py-3 text-3xl break-words text-center font-mono p-4 rounded-3xl drop-shadow-lg">Load more</button>
                 )}
+            </div>
         </main>
     )
 }

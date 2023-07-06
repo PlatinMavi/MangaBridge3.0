@@ -15,18 +15,20 @@ router.post("/add", async (req,res)=>{
 router.get("/lasttw", async (req, res) => {
     try {
         const latestChapters = await ChapterModel.aggregate([
-            { $sort: { createdAt: -1 } }, // Sort by createdAt in descending order
-            { $group: { _id: "$manga", chapter: { $first: "$$ROOT" } } }, // Group by manga and get the first document (latest chapter) for each manga
-            { $replaceRoot: { newRoot: "$chapter" } }, // Replace the root to get the complete chapter documents
+            { $sort: { createdAt: -1 } },
+            { $group: { _id: "$manga", chapter: { $first: "$$ROOT" } } },
+            { $sort: { "chapter.createdAt": -1 } }, // Sort by createdAt within each group
+            { $replaceRoot: { newRoot: "$chapter" } },
             {
                 $lookup: {
-                    from: 'mangas', // Use the actual name of the 'mangas' collection
-                    localField: 'manga',
-                    foreignField: '_id',
-                    as: 'manga'
+                from: 'mangas',
+                localField: 'manga',
+                foreignField: '_id',
+                as: 'manga'
                 }
             },
-            { $unwind: '$manga' }, // Deconstruct the 'manga' array created by the $lookup stage
+            { $unwind: '$manga' },
+            { $limit: 20 }
         ]);
 
         res.json(latestChapters);
@@ -44,12 +46,12 @@ router.get("/relevant/:id", async (req,res) =>{
 
 router.get("/lastup", async (req , res)=>{
     const page = parseInt(req.query.page || "0")
-    const LIMIT = (2)
+    const LIMIT = (5)
 
     const totalPages = await calculateTotalPages(LIMIT)
     const all = await ChapterModel.aggregate([
         { $sort: { createdAt: -1 } },
-        { $skip: 1 * page },
+        { $skip: page > 0 ? page * LIMIT : 0 },
         { $limit: LIMIT },
             {
                 $lookup: {

@@ -1,33 +1,30 @@
 import { useEffect, useState } from "react"
 import Header from "../componments/header"
 import Manga from "../componments/manga"
-import stack from "../stack.svg"
 import { Link } from "react-router-dom"
-
-
-// {Mmanga.length > 0 && Mmanga.map(manga =>(
-            
-//   <Manga key={manga._id} {...manga} />
-
-// ))}
+import Lasttw from "../componments/lasttw"
 
 
 export default function IndexPage(){
   const [topmanga, settopManga] = useState([])
+  const [lasttw, setLasttw] = useState([])
   
   useEffect( () => {
-      fetch("http://localhost:4000/manga/topfive",{
-      headers: {'Content-Type':'application/json'},
-      method:"GET",
-      credentials:"include"
-      }).then(response => response.json().then(mangas => settopManga(mangas)))
-    },[])
+    fetch("http://localhost:4000/manga/topfive",{
+    headers: {'Content-Type':'application/json'},
+    method:"GET",
+    credentials:"include"
+    }).then(response => response.json().then(mangas => settopManga(mangas)))
+  },[])
 
-    // {topmanga.length > 0 && topmanga.map(manga =>(
-            
-    //   <Manga key={manga._id} {...manga} />
-    
-    // ))}
+  useEffect( () => {
+    fetch("http://localhost:4000/chapter/lasttw",{
+    headers: {'Content-Type':'application/json'},
+    method:"GET",
+    credentials:"include"
+    }).then(response => response.json().then(chapters => setLasttw(chapters)))
+  },[])
+
     
   return(
 
@@ -77,12 +74,12 @@ export default function IndexPage(){
             <div className="container p-4 mx-auto mt-12 ">
                 <h3 className="text-4xl font-mono font-bold my-4">Son Yüklemeler:</h3>
                 <div className="flex flex-wrap -translate-x-16 gap-y-4 gap-x-24">
-                  <Link to="/chapter" className="bg-white bg-opacity-5 backdrop-blur-sm h-64 text-3xl break-words text-center font-mono p-4 rounded-3xl w-80  drop-shadow-lg translate-x-16" >
+                  <Link to="/chapter" className="bg-white bg-opacity-5 backdrop-blur-xs h-64 text-3xl break-words text-center font-mono p-4 rounded-3xl w-80  drop-shadow-lg translate-x-16" >
                     <p className="mt-12">Bana Tüm Son Yüklemeleri Göster</p>
                   </Link>
-                  {topmanga.length > 0 && topmanga.map(manga =>(
+                  {lasttw.length > 0 && lasttw.map(manga =>(
                     
-                    <Manga key={manga._id} {...manga} />
+                    <Lasttw key={manga._id} {...manga} />
                 
                   ))}
                 </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Header from "../componments/header"
+import Lasttw from "../componments/lasttw"
 
 export default function AllChapter(){
     const [Chapter, setChapter] = useState([])
@@ -32,19 +33,22 @@ export default function AllChapter(){
     }
 
     return(
-        <main className='bg-slate-900 min h-screen text-white'>
+        <main className='font-mono min h-screen text-white'>
             <Header />
-            <div className="container flex gap-4 my-12 mx-auto ">
+            <h1 className="text-6xl w-max mx-auto mt-8 font-bold">Bütün Bölümler</h1>
+            <div className="container flex flex-wrap gap-x-24 gap-y-4 my-12 mx-auto ">
                 {Chapter.length > 0 && Chapter.map(c =>(
             
-                   <h1>{c.number}</h1>
+                   <Lasttw key={c._id} {...c} />
             
                 ))}
+            </div>
+            <div className="flex justify-center my-8">
                 {total > page &&(
-                    <button onClick={GetMore}>Load more</button>
+                    <button onClick={GetMore} className="w-1/2 bg-white bg-opacity-5 backdrop-blur-sm border py-3 text-3xl break-words text-center font-mono p-4 rounded-3xl drop-shadow-lg">Load more</button>
                 )}
-                
-            </div>  
+            </div>
+            
         </main>
     )
 }
