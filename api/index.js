@@ -3,9 +3,11 @@ const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv").configDotenv()
 const cors = require("cors")
+const path = require('path');
 // requirements
 
 const app = express()
+app.use("Collection",express.static(path.join(__dirname, 'Collection')))
 
 app.use(cors({credentials:true,origin:"http://localhost:3000"}))
 app.use(express.json())
@@ -19,6 +21,13 @@ const chapterRoutes  = require("./routes/Chapter")
 app.use("/",userRoutes)
 app.use("/manga", mangaRoutes)
 app.use("/chapter", chapterRoutes)
+
+app.get("/Collection/:ad", (req,res)=>{
+    try{
+        res.sendFile(path.join(__dirname, `Collection/${req.params.ad}`))
+    }catch{}
+})
+
 
 mongoose.connect(process.env.DB_URI)
 const connection = mongoose.connection

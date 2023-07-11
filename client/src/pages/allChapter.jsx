@@ -35,7 +35,7 @@ export default function AllChapter(){
     return(
         <main className='font-mono min h-screen text-white'>
             <Header />
-            <h1 className="text-6xl w-max mx-auto mt-8 font-bold">En Son Eklenenler</h1>
+            <h1 className="text-6xl w-max mx-auto mt-16 font-bold">En Son Eklenenler</h1>
             <div className="container flex flex-wrap gap-x-24 gap-y-4 my-12 mx-auto ">
                 {Chapter.length > 0 && Chapter.map(c =>(
             

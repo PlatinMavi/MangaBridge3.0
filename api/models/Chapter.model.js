@@ -5,7 +5,10 @@ const ChapterSchema = new mongoose.Schema({
     url:{type:String},
     manga:{type: mongoose.Schema.Types.ObjectId, ref: 'Manga'},//manga id
     fansub:{type:String},//fansub 
-}, { timestamps: true })
+}, {
+    timestamps: true,
+     // Specify the collection name here
+  })
 
 const ChapterModel = mongoose.model("Chapter",ChapterSchema)
 

@@ -35,7 +35,7 @@ export default function LoginPage(){
     return(
         <main className=' text-white h-screen'>
           <Header/>
-          <div className="container mt-12 mx-auto ">
+          <div className="container mt-24 mx-auto ">
             <form onSubmit={login} className="w-max mx-auto p-12 flex flex-col gap-4 bg-slate-800 rounded-3xl">
                 <h1 className="font-bold text-3xl text-center">Login</h1>
 

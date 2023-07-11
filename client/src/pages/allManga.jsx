@@ -36,7 +36,7 @@ export default function AllManga(){
     return(
         <main className=' font-mono text-white'>
             <Header />
-            <h1 className="text-6xl w-max mx-auto mt-8 font-bold">Bütün Mangalar</h1>
+            <h1 className="text-6xl w-max mx-auto mt-16 font-bold">Bütün Mangalar</h1>
             <div className="container flex flex-wrap gap-x-24 gap-y-4 my-12 mx-auto ">
                 {Mmanga.length > 0 && Mmanga.map(manga =>(
             

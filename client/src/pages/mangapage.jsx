@@ -54,11 +54,11 @@ export default function MangaPage(){
     return(
         <div className="font-mono min-h-screen text-white">
             <Header />
-            <div className="container mx-auto mt-12">
+            <div className="container mx-auto mt-24">
                 <div className="grid gap-10 grid-cols-9">
                     <div className="col-span-2">
                         <div className=" bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
-                            <img src={Mmanga.image} alt="" className="rounded-xl"/>
+                            <img src={"http://localhost:4000/Collection/"+Mmanga.image} alt="" className="rounded-xl"/>
                             <h3 className="w-max mx-auto mt-2">Kategoriler</h3>
                             <hr />
                             <div className="flex flex-wrap justify-center gap-4 my-4">

@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const MangaModel = require("../models/Manga.model")
 
 
+
+
 router.get("/all/page", async (req,res) =>{
     const LIMIT = 20
     const page = parseInt(req.query.page || "0")

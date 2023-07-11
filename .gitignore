@@ -24,3 +24,4 @@
 
 /api/node_modules
 /api/.env
+/api/Collection

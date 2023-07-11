@@ -15,7 +15,6 @@ router.post("/add", async (req,res)=>{
 router.get("/lasttw", async (req, res) => {
     try {
         const latestChapters = await ChapterModel.aggregate([
-            { $sort: { createdAt: -1 } },
             {
                 $group: {
                 _id: "$manga",
@@ -34,7 +33,7 @@ router.get("/lasttw", async (req, res) => {
             },
             { $unwind: "$manga" },
             { $limit: 19 },
-        ]);
+        ]).allowDiskUse(true);
 
         const sortedChapters = latestChapters.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -64,7 +63,7 @@ router.get("/lastup", async (req , res)=>{
     const totalPages = await calculateTotalPages(LIMIT)
     const all = await ChapterModel.aggregate([
         { $sort: { createdAt: -1 } },
-        { $skip: page > 0 ? page * LIMIT : 0 },
+        { $skip: page * LIMIT },
         { $limit: LIMIT },
             {
                 $lookup: {
@@ -76,6 +75,7 @@ router.get("/lastup", async (req , res)=>{
             },
         { $unwind: '$manga' },
       ])
+
 
     res.json({all, totalPages})
 })
