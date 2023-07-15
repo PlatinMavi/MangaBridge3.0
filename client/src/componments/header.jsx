@@ -3,6 +3,7 @@ import { useEffect} from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../usercontext";
 import SearchBar from "./search";
+import favicon from "../favicon.ico"
 
 export default function Header(){
 
@@ -42,13 +43,14 @@ export default function Header(){
 
                 {username && (
                     <>
-                        <div onClick={logout} className="logout cursor-pointer">Logout</div>
+                        <div onClick={logout} className="logout cursor-pointer">Çıkış Yap</div>
+                        <Link to={"/profile"} className="profile flex gap-2">{username} <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> </Link>
                     </>
                 )}
                 {!username && (
                     <>
-                        <Link to="/login" className="login ">Login</Link>
-                        <Link to="/register" className="register ">Register</Link>
+                        <Link to="/login" className="login ">Giriş Yap</Link>
+                        <Link to="/register" className="register ">Kayıt Ol</Link>
                         
                     </>
                 )}

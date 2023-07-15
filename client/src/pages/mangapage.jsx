@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Header from "../componments/header"
 import { Link } from "react-router-dom"
+import { UserContext } from "../usercontext";
+import { useContext } from "react";
 // import Manga from "../componments/manga"
 
 export default function MangaPage(){
@@ -43,12 +45,32 @@ export default function MangaPage(){
             });
     }
 
+    function Kaydet(userId,mangaId){
+        fetch(`http://localhost:4000/manga/save/${userId}&${mangaId}`, {
+            headers: { 'Content-Type': 'application/json' },
+        })
+    }
+
     const myStyle = {
         backgroundColor: 'rgb(15, 23, 42)',
         backgroundImage:
           'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
         backgroundSize: '1em 1em',
-      };
+    };
+
+    const {setUserInfo,userInfo} = useContext(UserContext);
+    useEffect(() =>{
+      fetch('http://localhost:4000/profile', {
+        credentials: 'include',
+        headers: {'Content-Type':'application/json'},
+      }).then(response => {
+        response.json().then(userinfo => {
+          setUserInfo(userinfo);
+        });
+      });
+    }, []);
+
+    const username = userInfo?.usernameStabilazed;
 
 
     return(
@@ -66,7 +88,8 @@ export default function MangaPage(){
                                 <h5 key={index} className="text-lg shadow-2xl">{category}</h5>
                             ))}
                             </div>
-                            <button className="w-full rounded-xl text-xl p-2 bg-slate-900">Kaydet</button>
+                            {username &&(<button onClick={Kaydet(userInfo._id,Mmanga._id)} className="w-full rounded-xl text-xl p-2 bg-slate-900" id="save">Kaydet</button>)}
+                            {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
                     <div className="col-span-7 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">

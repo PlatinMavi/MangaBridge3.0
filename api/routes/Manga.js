@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const mongoose = require("mongoose")
 const MangaModel = require("../models/Manga.model")
-
+const UserModel = require("../models/User.model")
 
 
 
@@ -51,6 +51,47 @@ router.get("/:name", async (req, res)=>{
     }
 })
 
+router.get("/save/getall/:userId", async (req,res)=>{
+    const userId = req.params.userId;
+    try {
+        const user = await UserModel.findById(userId).populate('saved');
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const savedMangas = user.saved.map(manga => manga.toObject());
+        res.json(savedMangas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while retrieving saved mangas' });
+    }
+})
+
+router.get("/save/:user&:manga", async (req,res)=>{
+    const userId = req.params.user
+    const mangaId = req.params.manga
+    try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Check if mangaId exists in the saved array
+        const isMangaSaved = user.saved.includes(mangaId);
+        if (isMangaSaved) {
+            return res.status(400).json({ error: 'Manga already saved' });
+        }
+
+        // Push mangaId to the saved array
+        user.saved.push(mangaId);
+        const updatedUser = await user.save();
+        res.json(updatedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while saving the manga' });
+    }
+})
+
 router.post("/add", async (req, res)=>{
     const {Name,Img,Desc,Categorys,Browser} = req.body
     try {
@@ -61,8 +102,6 @@ router.post("/add", async (req, res)=>{
         res.json(error)
     }
 })
-
-
 
 // FUNCTIONSSSSS
 

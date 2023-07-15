@@ -13,7 +13,11 @@ const UserSchema = new mongoose.Schema({
     salt:{
         type:String,
         required:true
-    }
+    },
+    saved:[{
+        type: mongoose.Schema.Types.ObjectId,
+         ref: 'Manga'
+    }],
 }, { timestamps: true })
 
 const UserModel = mongoose.model("User", UserSchema)
