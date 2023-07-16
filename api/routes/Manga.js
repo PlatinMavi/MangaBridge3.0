@@ -67,9 +67,33 @@ router.get("/save/getall/:userId", async (req,res)=>{
     }
 })
 
-router.get("/save/:user&:manga", async (req,res)=>{
-    const userId = req.params.user
-    const mangaId = req.params.manga
+router.get("/check/:user&:manga", async (req, res) => {
+    const userId = req.params.user;
+    const mangaId = req.params.manga;
+
+    try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Check if mangaId exists in the saved array
+        const isMangaSaved = user.saved.includes(mangaId);
+        if (isMangaSaved) {
+            return res.sendStatus(200);
+        } else {
+            return res.status(404).json({ error: 'Manga not saved' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while checking the manga' });
+    }
+});
+
+router.get("/save/:user&:manga", async (req, res) => {
+    const userId = req.params.user;
+    const mangaId = req.params.manga;
+
     try {
         const user = await UserModel.findById(userId);
         if (!user) {
@@ -84,13 +108,15 @@ router.get("/save/:user&:manga", async (req,res)=>{
 
         // Push mangaId to the saved array
         user.saved.push(mangaId);
-        const updatedUser = await user.save();
-        res.json(updatedUser);
+        await user.save();
+        
+        res.sendStatus(200); // Send success status code
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while saving the manga' });
     }
-})
+});
+
 
 router.post("/add", async (req, res)=>{
     const {Name,Img,Desc,Categorys,Browser} = req.body

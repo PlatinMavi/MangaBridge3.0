@@ -11,7 +11,11 @@ export default function MangaPage(){
     const [Chapter,setChapter] = useState([])
     const [Count, setCount] = useState(0)
     const [Fansub,setFansub] = useState([])
+    const [Status,setStatus] = useState(0)
+    const [isSaved, setIsSaved] = useState(0)
     const params = useParams()
+    const {setUserInfo,userInfo} = useContext(UserContext);
+
     useEffect(() => {
         fetch(`http://localhost:4000/manga/${params.name}`, {
             credentials: "include",
@@ -27,6 +31,42 @@ export default function MangaPage(){
                 // Handle the error if necessary
             });
     }, []);
+
+    useEffect(() =>{
+      fetch('http://localhost:4000/profile', {
+        credentials: 'include',
+        headers: {'Content-Type':'application/json'},
+      }).then(response => {
+        response.json().then(userinfo => {
+          setUserInfo(userinfo);
+        });
+      });
+    }, []);
+
+    useEffect(() => {
+        // ... Existing code
+
+        async function check() {
+            try {
+                const response = await fetch(`http://localhost:4000/manga/check/${userInfo.id}&${Mmanga._id}`, {
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                
+                if (response.ok) {
+                    setIsSaved(true);
+                } else if (response.status === 404) {
+                    setIsSaved(false);
+                }
+            } catch (error) {
+                console.error('Error checking manga:', error);
+                // Handle the error if necessary
+            }
+        }
+
+        check();
+    }, [userInfo.id, Mmanga._id]);
+
+    // ... Remaining code
     
     function chapterGetter(mangaId) {
         fetch(`http://localhost:4000/chapter/relevant/${mangaId}`, {
@@ -44,11 +84,27 @@ export default function MangaPage(){
                 // Handle the error if necessary
             });
     }
+    
+    function wrapper(userId,MangaId){
+        Kaydet(userId,MangaId)
+        StyleChanger()
+    }
 
     function Kaydet(userId,mangaId){
         fetch(`http://localhost:4000/manga/save/${userId}&${mangaId}`, {
             headers: { 'Content-Type': 'application/json' },
-        })
+        }).then(res => res.status).then(resstat => setStatus(resstat))
+    }
+
+    function StyleChanger(){
+        if (Status === 400){
+            document.getElementById("save").innerHTML = "Kaydedildi"
+            document.getElementById("save").classList.add("bg-red-600")
+            document.getElementById("save").classList.remove("bg-slate-900")
+        }else{
+            alert("Kaydetmede Hata Oluştu")
+        }
+        
     }
 
     const myStyle = {
@@ -58,17 +114,7 @@ export default function MangaPage(){
         backgroundSize: '1em 1em',
     };
 
-    const {setUserInfo,userInfo} = useContext(UserContext);
-    useEffect(() =>{
-      fetch('http://localhost:4000/profile', {
-        credentials: 'include',
-        headers: {'Content-Type':'application/json'},
-      }).then(response => {
-        response.json().then(userinfo => {
-          setUserInfo(userinfo);
-        });
-      });
-    }, []);
+    
 
     const username = userInfo?.usernameStabilazed;
 
@@ -88,7 +134,7 @@ export default function MangaPage(){
                                 <h5 key={index} className="text-lg shadow-2xl">{category}</h5>
                             ))}
                             </div>
-                            {username &&(<button onClick={Kaydet(userInfo._id,Mmanga._id)} className="w-full rounded-xl text-xl p-2 bg-slate-900" id="save">Kaydet</button>)}
+                            {username &&(<button onClick={()=> wrapper(userInfo.id,Mmanga._id) } className="w-full rounded-xl text-xl p-2 bg-slate-900" id="save">Kaydet</button>)}
                             {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
