@@ -17,73 +17,68 @@ export default function MangaPage(){
     const {setUserInfo,userInfo} = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://localhost:4000/manga/${params.name}`, {
-            credentials: "include",
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(response => response.json())
-            .then(manga => {
-                setManga(manga);
-                chapterGetter(manga._id); // Call chapterGetter with the manga._id after setting the manga state
-            })
-            .catch(error => {
-                console.error('Error fetching manga:', error);
-                // Handle the error if necessary
-            });
-    }, []);
-
-    useEffect(() =>{
-      fetch('http://localhost:4000/profile', {
-        credentials: 'include',
-        headers: {'Content-Type':'application/json'},
-      }).then(response => {
-        response.json().then(userinfo => {
-          setUserInfo(userinfo);
-        });
-      });
-    }, []);
-
-    useEffect(() => {
-        // ... Existing code
 
         async function check() {
-            try {
-                const response = await fetch(`http://localhost:4000/manga/check/${userInfo.id}&${Mmanga._id}`, {
-                    headers: { 'Content-Type': 'application/json' },
+            await fetch(`http://localhost:4000/manga/${params.name}`, {
+                credentials: "include",
+                headers: { 'Content-Type': 'application/json' },
+                })
+                .then(response => response.json())
+                .then(manga => {
+                    setManga(manga);
+                    chapterGetter(manga._id); // Call chapterGetter with the manga._id after setting the manga state
+                })
+                .catch(error => {
+                    console.error('Error fetching manga:', error);
+                    // Handle the error if necessary
+            });
+
+            await fetch('http://localhost:4000/profile', {
+                credentials: 'include',
+                headers: {'Content-Type':'application/json'},
+                }).then(response => {
+                response.json().then(userinfo => {
+                    setUserInfo(userinfo);
                 });
-                
-                if (response.ok) {
-                    setIsSaved(true);
-                } else if (response.status === 404) {
-                    setIsSaved(false);
-                }
-            } catch (error) {
-                console.error('Error checking manga:', error);
-                // Handle the error if necessary
+            })
+
+            console.log(userInfo,Mmanga)
+            
+            const response = await fetch(`http://localhost:4000/manga/check/${userInfo.id}&${Mmanga._id}`, {
+                headers: { 'Content-Type': 'application/json' },
+            })
+            
+            if (response.ok) {
+                setIsSaved(true);
+            } else if (response.status === 404) {
+                setIsSaved(false);
             }
+
+            function chapterGetter(mangaId) {
+                fetch(`http://localhost:4000/chapter/relevant/${mangaId}`, {
+                    credentials: "include",
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                    .then(response => response.json())
+                    .then(chapter => {
+                        setChapter(chapter.chapters);
+                        setCount(chapter.count)
+                        setFansub(chapter.fansubs)
+                    })
+                    .catch(error => {
+                        console.error('Error fetching chapters:', error);
+                        // Handle the error if necessary
+                    });
+            }
+            
         }
 
         check();
-    }, [userInfo.id, Mmanga._id]);
+    }, []);
 
     // ... Remaining code
     
-    function chapterGetter(mangaId) {
-        fetch(`http://localhost:4000/chapter/relevant/${mangaId}`, {
-            credentials: "include",
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(response => response.json())
-            .then(chapter => {
-                setChapter(chapter.chapters);
-                setCount(chapter.count)
-                setFansub(chapter.fansubs)
-            })
-            .catch(error => {
-                console.error('Error fetching chapters:', error);
-                // Handle the error if necessary
-            });
-    }
+    
     
     function wrapper(userId,MangaId){
         Kaydet(userId,MangaId)
@@ -165,8 +160,8 @@ export default function MangaPage(){
                                     <h4>{Fansubs}</h4> <hr />
                                     {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
                                         (chapter, index) => (
-                                            <Link to={chapter.url}>
-                                                <div className="text-2xl w-full p-2 my-2 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm drop-shadow-lg rounded-xl"  key={index}>{chapter.number}. Bölüm</div>
+                                            <Link to={chapter.url} key={index}>
+                                                <div className="text-2xl w-full p-2 my-2 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm drop-shadow-lg rounded-xl"  >{chapter.number}. Bölüm</div>
                                             </Link>
                                         )
                                     )}
