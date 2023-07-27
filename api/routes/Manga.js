@@ -80,9 +80,9 @@ router.get("/check/:user&:manga", async (req, res) => {
         // Check if mangaId exists in the saved array
         const isMangaSaved = user.saved.includes(mangaId);
         if (isMangaSaved) {
-            return res.sendStatus(200);
+            return res.json({issaved:true});
         } else {
-            return res.status(404).json({ error: 'Manga not saved' });
+            return res.json({issaved:false});
         }
     } catch (error) {
         console.error(error);
@@ -101,21 +101,25 @@ router.get("/save/:user&:manga", async (req, res) => {
         }
 
         // Check if mangaId exists in the saved array
-        const isMangaSaved = user.saved.includes(mangaId);
-        if (isMangaSaved) {
-            return res.status(400).json({ error: 'Manga already saved' });
+        const mangaIndex = user.saved.indexOf(mangaId);
+        if (mangaIndex !== -1) {
+            // Manga is already saved, so remove it from the array
+            user.saved.splice(mangaIndex, 1);
+            await user.save();
+            return res.json({ issaved: false });
         }
 
         // Push mangaId to the saved array
         user.saved.push(mangaId);
         await user.save();
         
-        res.sendStatus(200); // Send success status code
+        res.json({ issaved: true }); // Send success status code
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while saving the manga' });
     }
 });
+
 
 
 router.post("/add", async (req, res)=>{

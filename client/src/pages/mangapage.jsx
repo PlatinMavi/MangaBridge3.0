@@ -9,16 +9,17 @@ import { useContext } from "react";
 export default function MangaPage(){
     const [Mmanga, setManga] = useState({})
     const [Chapter,setChapter] = useState([])
-    const [Count, setCount] = useState(0)
+    const [Count, setCount] = useState(0) //chapter count
     const [Fansub,setFansub] = useState([])
-    const [Status,setStatus] = useState(0)
-    const [isSaved, setIsSaved] = useState(0)
+    const [isSaved, setIsSaved] = useState(false)//check if saved
     const params = useParams()
-    const {setUserInfo,userInfo} = useContext(UserContext);
+    const {userInfo} = useContext(UserContext);
+
+    const [cout,setCout] = useState(0)//prevent if saved running twice
 
     useEffect(() => {
 
-        async function check() {
+        async function check(userInfo) {
             await fetch(`http://localhost:4000/manga/${params.name}`, {
                 credentials: "include",
                 headers: { 'Content-Type': 'application/json' },
@@ -27,33 +28,19 @@ export default function MangaPage(){
                 .then(manga => {
                     setManga(manga);
                     chapterGetter(manga._id); // Call chapterGetter with the manga._id after setting the manga state
+                    Check(manga)
                 })
                 .catch(error => {
                     console.error('Error fetching manga:', error);
                     // Handle the error if necessary
             });
 
-            await fetch('http://localhost:4000/profile', {
-                credentials: 'include',
-                headers: {'Content-Type':'application/json'},
-                }).then(response => {
-                response.json().then(userinfo => {
-                    setUserInfo(userinfo);
-                });
-            })
-
-            console.log(userInfo,Mmanga)
-            
-            const response = await fetch(`http://localhost:4000/manga/check/${userInfo.id}&${Mmanga._id}`, {
+            function Check(Mmanga){
+                fetch(`http://localhost:4000/manga/check/${userInfo.id}&${Mmanga._id}`, {
                 headers: { 'Content-Type': 'application/json' },
-            })
-            
-            if (response.ok) {
-                setIsSaved(true);
-            } else if (response.status === 404) {
-                setIsSaved(false);
+                }).then(response => response.json()).then(data => setIsSaved(data.issaved))
             }
-
+        
             function chapterGetter(mangaId) {
                 fetch(`http://localhost:4000/chapter/relevant/${mangaId}`, {
                     credentials: "include",
@@ -73,34 +60,41 @@ export default function MangaPage(){
             
         }
 
-        check();
-    }, []);
+        if(cout === 1){
+            check(userInfo)
+        }
+        else{setCout(1)}
+        ;
+    }, [userInfo]);
 
-    // ... Remaining code
-    
-    
-    
-    function wrapper(userId,MangaId){
-        Kaydet(userId,MangaId)
-        StyleChanger()
-    }
+    useEffect(()=>{
+        if(isSaved === true){
+            document.getElementById("save").innerHTML = "Kaydedildi"
+            document.getElementById("save").classList.add("bg-red-600")
+            document.getElementById("save").classList.remove("bg-slate-900")
+        }
+    },[isSaved])
 
     function Kaydet(userId,mangaId){
         fetch(`http://localhost:4000/manga/save/${userId}&${mangaId}`, {
             headers: { 'Content-Type': 'application/json' },
-        }).then(res => res.status).then(resstat => setStatus(resstat))
+        }).then(res => res.json()).then(resstat => StyleChanger(resstat.issaved))
     }
 
-    function StyleChanger(){
-        if (Status === 400){
+    function StyleChanger(Status){
+        console.log(Status)
+        if (Status === true){
             document.getElementById("save").innerHTML = "Kaydedildi"
             document.getElementById("save").classList.add("bg-red-600")
             document.getElementById("save").classList.remove("bg-slate-900")
-        }else{
-            alert("Kaydetmede Hata Oluştu")
+        }else if(Status === false){
+            document.getElementById("save").innerHTML = "Kaydet"
+            document.getElementById("save").classList.remove("bg-red-600")
+            document.getElementById("save").classList.add("bg-slate-900")
         }
         
     }
+
 
     const myStyle = {
         backgroundColor: 'rgb(15, 23, 42)',
@@ -129,7 +123,7 @@ export default function MangaPage(){
                                 <h5 key={index} className="text-lg shadow-2xl">{category}</h5>
                             ))}
                             </div>
-                            {username &&(<button onClick={()=> wrapper(userInfo.id,Mmanga._id) } className="w-full rounded-xl text-xl p-2 bg-slate-900" id="save">Kaydet</button>)}
+                            {username &&(<button onClick={()=> {Kaydet(userInfo.id,Mmanga._id)} } className="w-full rounded-xl text-xl p-2 bg-slate-900" id="save">Kaydet</button>)}
                             {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
