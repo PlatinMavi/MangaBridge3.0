@@ -35,7 +35,9 @@ export default function Header(){
         <header className=' flex justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
             <Link to="/" className="logo">MangaBridge</Link>
             <nav className=' flex gap-4'>
-              
+              <Link to="https://discord.gg/3bYYqP9Gzu" target="_blank">
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" loading="lazy" alt="" className="mark-logos w-8 h-8 " />
+              </Link>
               <Link to="/hakkinda" className="border px-2 rounded-xl">Hakkımızda & SSS</Link>
               <Link to="/manga" className="border px-2 rounded-xl">Seriler</Link>
               <Link to="/chapter" className="border px-2 rounded-xl">Yeni Eklenenler</Link>

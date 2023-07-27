@@ -23,7 +23,7 @@ export default function AboutUsPage(){
                                 <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                                 MangaBridge Amacı Nedir ?
                             </h3>
-                            <p className="text-gray-500 dark:text-gray-400">Küçük çeviri sitelerinin gelişimine ve tanıtımına yardımcı olmak, aynı zamanda büyük sitelerde tatlı bir çeviri rekabeti oluşturup türkiyede asya bazlı roman endüstrisini geliştirmektir.</p>
+                            <p className="text-gray-500 dark:text-gray-400">Küçük çeviri sitelerinin gelişimine ve tanıtımına yardımcı olmak, aynı zamanda büyük sitelerde tatlı bir çeviri rekabeti oluşturup Türkiyede asya bazlı roman endüstrisini geliştirmektir.</p>
                         </div>
                         <div className="mb-10">                        
                             <h3 className="flex items-center mb-4 text-lg font-medium text-white">
@@ -55,7 +55,7 @@ export default function AboutUsPage(){
                                 <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                                 Hesap Açmanın Amacı Nedir ?
                             </h3>
-                            <p className="text-gray-500 dark:text-gray-400">Şu anda Okuduğunuz mangaları kaydetmenize işe yaramakla birlikte, ileride kaydettiğiniz mangaların yeni bölümlerini bildirmek, koleksiyon oluşturmak, bölüm takibi gibi özellikler eklenecektir. Sitemiz hala beta aşamasında olduğu için anlayış göstermenizi rica ediyorum. :)</p>
+                            <p className="text-gray-500 dark:text-gray-400">Şu anda Okuduğunuz mangaları kaydetmenize işe yaramakla birlikte, ileride kaydettiğiniz mangaların yeni bölümlerini bildirmek, koleksiyon oluşturmak, bölüm takibi gibi özellikler eklenecektir. Mangalarla ilgili Blog yazabileceksiniz. Sitemiz hala beta aşamasında olduğu için anlayış göstermenizi rica ediyorum. :)</p>
                         </div>
                         <div className="mb-10">
                             <h3 className="flex items-center mb-4 text-lg font-medium text-white">
