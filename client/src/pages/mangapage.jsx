@@ -4,6 +4,7 @@ import Header from "../componments/header"
 import { Link } from "react-router-dom"
 import { UserContext } from "../usercontext";
 import { useContext } from "react";
+import favicon from "../favicon.ico"
 // import Manga from "../componments/manga"
 
 export default function MangaPage(){
@@ -14,8 +15,10 @@ export default function MangaPage(){
     const [isSaved, setIsSaved] = useState(false)//check if saved
     const params = useParams()
     const {userInfo} = useContext(UserContext);
-
     const [cout,setCout] = useState(0)//prevent if saved running twice
+
+    const [comments, setComments] = useState([])
+    const [content,setContent] = useState("")
 
     useEffect(() => {
 
@@ -29,6 +32,7 @@ export default function MangaPage(){
                     setManga(manga);
                     chapterGetter(manga._id); // Call chapterGetter with the manga._id after setting the manga state
                     Check(manga)
+                    CommentsGetter(manga._id)
                 })
                 .catch(error => {
                     console.error('Error fetching manga:', error);
@@ -56,6 +60,12 @@ export default function MangaPage(){
                         console.error('Error fetching chapters:', error);
                         // Handle the error if necessary
                     });
+            }
+
+            function CommentsGetter(mangaId){
+                fetch(`http://localhost:4000/manga/comments/${mangaId}`, {
+                    headers: { 'Content-Type': 'application/json' }})
+                .then(response => response.json()).then(data => setComments(data))
             }
             
         }
@@ -100,6 +110,15 @@ export default function MangaPage(){
         
     }
 
+    function SubmitComment(ev){
+        ev.preventDefault()
+        fetch("http://localhost:4000/manga/comments/add",{ 
+            method:"POST",
+            body: JSON.stringify({content:content,user:userInfo.id,manga:Mmanga._id}),
+            headers: {'Content-Type':'application/json'},
+            credentials: 'include',
+        }).then(response => response.json()).then(data => setComments(data))
+    }
 
     const myStyle = {
         backgroundColor: 'rgb(15, 23, 42)',
@@ -132,41 +151,72 @@ export default function MangaPage(){
                             {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
-                    <div className="col-span-7 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
-                        <h1 className="text-4xl"> 
-                            {Mmanga.name}
-                        </h1>
-                        <hr />
-                        <h3 className="text-xl">
-                            Konusu: <br /> <span className="text-slate-300 text-lg">{Mmanga.desc}</span>
-                        </h3>
-                        <hr />
-                        <div className="flex flex-wrap mt-2 gap-x-10 text-xl">
-                            <h4 className=" ">Mevcut Bölüm Sayısı: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Count}</span></h4>
-                            <div className="flex gap-4" >Çevirenler: 
+                    <div className="col-span-7 ">
+                        <div className="bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
+                            <h1 className="text-4xl"> 
+                                {Mmanga.name}
+                            </h1>
+                            <hr />
+                            <h3 className="text-xl">
+                                Konusu: <br /> <span className="text-slate-300 text-lg">{Mmanga.desc}</span>
+                            </h3>
+                            <hr />
+                            <div className="flex flex-wrap mt-2 gap-x-10 text-xl">
+                                <h4 className=" ">Mevcut Bölüm Sayısı: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Count}</span></h4>
+                                <div className="flex gap-4" >Çevirenler: 
+                                    {Fansub && Fansub.map((Fansubs, index) => (
+                                        <h4 key={index} className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Fansubs} </h4>
+                                    ))}
+                                </div>
+                            </div>
+                            <h5 className="text-xl mt-4"> 
+                                Görüntülenme: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Mmanga.view}</span>
+                            </h5>
+                            <hr />
+                            <div className="grid grid-cols-4 gap-6">
                                 {Fansub && Fansub.map((Fansubs, index) => (
-                                    <h4 key={index} className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Fansubs} </h4>
+                                    <div key={index} className="font-bold text-center mt-6 rounded-2xl p-2 h-96 overflow-y-scroll no-scrollbar" style={myStyle}>
+                                        <h4>{Fansubs}</h4> <hr />
+                                        {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
+                                            (chapter, index) => (
+                                                <Link to={chapter.url} key={index}>
+                                                    <div className="text-2xl w-full p-2 my-2 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm drop-shadow-lg rounded-xl"  >{chapter.number}. Bölüm</div>
+                                                </Link>
+                                            )
+                                        )}
+                                    </div>
                                 ))}
                             </div>
                         </div>
-                        <h5 className="text-xl mt-4"> 
-                            Görüntülenme: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Mmanga.view}</span>
-                        </h5>
-                        <hr />
-                        <div className="grid grid-cols-4 gap-6">
-                            {Fansub && Fansub.map((Fansubs, index) => (
-                                <div key={index} className="font-bold text-center mt-6 rounded-2xl p-2 h-96 overflow-y-scroll no-scrollbar" style={myStyle}>
-                                    <h4>{Fansubs}</h4> <hr />
-                                    {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
-                                        (chapter, index) => (
-                                            <Link to={chapter.url} key={index}>
-                                                <div className="text-2xl w-full p-2 my-2 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm drop-shadow-lg rounded-xl"  >{chapter.number}. Bölüm</div>
-                                            </Link>
-                                        )
-                                    )}
-                                </div>
-                            ))}
+
+                        <div className="comments bg-white shadow-xl bg-opacity-5 mt-8 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
+                            {username && (
+                                <form onSubmit={SubmitComment} className="flex flex-wrap text-lg w-full">
+                                    <input type="text" className="bg-transparent max-w-full border mr-2 p-2 flex-grow rounded-xl " placeholder="Yorum yap..." value={content} onChange={ev => setContent(ev.target.value)} />
+                                    <button className="border p-2 rounded-xl">Gönder</button>
+                                    <h3 className="mx-2 text-2xl mt-1 flex gap-1"> <img src={favicon} alt="" className="rounded-full w-10 h-10 border p-1" /> <span className="">{username}</span> </h3>
+                                </form>
+                            )}
+                            {!username && (
+                                <>
+                                    <h3 className="text-center text-3xl font-bold">Yorum yapmak için giriş yapınız...</h3>        
+                                </>
+                            )}
+                            
                         </div>
+
+                        <div className="comments bg-white shadow-xl bg-opacity-5 mt-8 backdrop-blur-sm text-3xl break-words font-mono  rounded-3xl drop-shadow-lg">
+                                {comments && comments.map((content, index) => (
+                                    <div className="p-4 flex border rounded-2xl mt-2 border-slate-500 flex-wrap">
+                                        
+                                        <h3 className="mx-2 text-2xl mt-1 flex gap-1"> <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> <span className="">{username} :</span> </h3>
+                                        <p key={index} className="text-lg mt-2 shadow-2xl">{content.content}</p>
+                                        
+                                    </div>
+                                ))}
+
+                        </div>
+
                     </div>
                 </div>
             </div>

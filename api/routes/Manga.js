@@ -2,7 +2,7 @@ const router = require("express").Router()
 const mongoose = require("mongoose")
 const MangaModel = require("../models/Manga.model")
 const UserModel = require("../models/User.model")
-
+const CommentModel = require("../models/Comment.model")
 
 
 router.get("/all/page", async (req,res) =>{
@@ -120,7 +120,21 @@ router.get("/save/:user&:manga", async (req, res) => {
     }
 });
 
+router.get("/comments/:manga", async (req,res)=>{
+    const manga = req.params.manga
+    const comments = await CommentModel.find({manga:manga})
+    res.json(comments)
+})
 
+router.post("/comments/add", async (req,res)=>{
+    const content = req.body.content
+    const user = req.body.user
+    const manga = req.body.manga
+    
+    await CommentModel.create({content:content,manga:manga,user:user})
+    const comments = await CommentModel.find({manga:manga})
+    res.json(comments)
+})
 
 router.post("/add", async (req, res)=>{
     const {Name,Img,Desc,Categorys,Browser} = req.body
