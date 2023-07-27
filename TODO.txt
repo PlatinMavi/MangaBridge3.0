@@ -1,3 +1,5 @@
 anahtar kelime(seo)
 Transition inbetween pages
 loading screen
+yorum silme
+isim değişirme

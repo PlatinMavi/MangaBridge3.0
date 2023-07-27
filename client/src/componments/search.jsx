@@ -44,7 +44,7 @@ export default function SearchBar() {
             onChange={(e) => setKey(e.target.value)}
           />
         </div>
-        <button className=" bg-gradient-to-r from-purple-600 to-teal-600 rounded-r-xl px-2">Ara</button>
+        
       </div>
       {searchResults.length > 0 &&
         <div className="results p-4 m-4 -translate-x-2 bg-slate-900 shadow-2xl rounded-3xl absolute">
@@ -52,7 +52,7 @@ export default function SearchBar() {
             searchResults.map((manga) => (
               <Link to={"/manga/"+manga.browser} >
                 <div className="flex w-64 break-words my-1 gap-x-2">
-                    <img src={"http://localhost:4000/Collection/"+manga.image} alt="" className="w-16 rounded-lg" />
+                    <img src={"http://localhost:4000/Collection/"+manga.image} alt="" className="w-16 h-24 rounded-lg" />
                     <h5 className="" key={manga._id}> {manga.name} </h5>
                 </div>
               </Link>

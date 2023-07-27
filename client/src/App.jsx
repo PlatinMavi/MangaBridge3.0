@@ -10,6 +10,7 @@ import MangaPage from './pages/mangapage';
 import AllManga from './pages/allManga';
 import AllChapter from './pages/allChapter';
 import ProfilePage from './pages/profile';
+import AboutUsPage from './pages/aboutus';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path={"/chapter"} element={<AllChapter/>} />
 
         <Route path={"/profile"} element={<ProfilePage/>} />
+
+        <Route path={"/hakkinda"} element={<AboutUsPage/>}/>
 
       </Routes>
     </UserContextProvider>

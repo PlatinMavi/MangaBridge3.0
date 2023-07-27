@@ -209,7 +209,7 @@ export default function MangaPage(){
                                 {comments && comments.map((content, index) => (
                                     <div className="p-4 flex border rounded-2xl mt-2 border-slate-500 flex-wrap">
                                         
-                                        <h3 className="mx-2 text-2xl mt-1 flex gap-1"> <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> <span className="">{username} :</span> </h3>
+                                        <h3 className="mx-2 text-2xl mt-1 flex gap-1"> <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> <span className="">{content.user.username} :</span> </h3>
                                         <p key={index} className="text-lg mt-2 shadow-2xl">{content.content}</p>
                                         
                                     </div>

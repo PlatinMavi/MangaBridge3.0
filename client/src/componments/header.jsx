@@ -36,7 +36,7 @@ export default function Header(){
             <Link to="/" className="logo">MangaBridge</Link>
             <nav className=' flex gap-4'>
               
-
+              <Link to="/hakkinda" className="border px-2 rounded-xl">Hakkımızda & SSS</Link>
               <Link to="/manga" className="border px-2 rounded-xl">Seriler</Link>
               <Link to="/chapter" className="border px-2 rounded-xl">Yeni Eklenenler</Link>
               <SearchBar/>

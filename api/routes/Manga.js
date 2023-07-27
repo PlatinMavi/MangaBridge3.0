@@ -122,7 +122,7 @@ router.get("/save/:user&:manga", async (req, res) => {
 
 router.get("/comments/:manga", async (req,res)=>{
     const manga = req.params.manga
-    const comments = await CommentModel.find({manga:manga})
+    const comments = await CommentModel.find({manga:manga}).populate("user")
     res.json(comments)
 })
 
@@ -132,7 +132,7 @@ router.post("/comments/add", async (req,res)=>{
     const manga = req.body.manga
     
     await CommentModel.create({content:content,manga:manga,user:user})
-    const comments = await CommentModel.find({manga:manga})
+    const comments = await CommentModel.find({manga:manga}).populate("user")
     res.json(comments)
 })
 
