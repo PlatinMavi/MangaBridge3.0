@@ -63,7 +63,12 @@ export default function MangaPage(){
         if(cout === 1){
             check(userInfo)
         }
-        else{setCout(1)}
+        else{
+            if(userInfo === ""){
+                check()
+            }
+            setCout(1)
+        }
         ;
     }, [userInfo]);
 
