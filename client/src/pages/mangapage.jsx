@@ -127,6 +127,14 @@ export default function MangaPage(){
         backgroundSize: '1em 1em',
     };
 
+    function deletecomment(id){
+        fetch("http://localhost:4000/manga/comments/delete",{ 
+            method:"POST",
+            body: JSON.stringify({id:id, manga:Mmanga._id}),
+            headers: {'Content-Type':'application/json'},
+            credentials: 'include',
+        }).then(response => response.json()).then(data => setComments(data))
+    }
     
 
     const username = userInfo?.usernameStabilazed;
@@ -137,7 +145,7 @@ export default function MangaPage(){
             <Header />
             <div className="container mx-auto mt-24">
                 <div className="grid gap-10 lg:grid-cols-9 grid-cols-1">
-                    <div className="lg:col-span-2 w-screen">
+                    <div className="lg:col-span-2 lg:w-auto w-screen">
                         <div className=" bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
                             <img src={"http://localhost:4000/Collection/"+Mmanga.image} alt="" className="rounded-xl mx-auto"/>
                             <h3 className="w-max mx-auto mt-2">Kategoriler</h3>
@@ -209,7 +217,17 @@ export default function MangaPage(){
                                 {comments && comments.map((content, index) => (
                                     <div className="p-4 flex border rounded-2xl mt-2 border-slate-500 flex-wrap">
                                         
-                                        <h3 className="mx-2 text-2xl mt-1 flex gap-1"> <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> <span className="">{content.user.username} :</span> </h3>
+                                        <h3 className="mx-2 text-2xl mt-1 flex gap-1">
+                                            {content.user.username === username && (
+                                                <button onClick={()=>{deletecomment(content._id)}}>
+                                                    <svg className="mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                    </svg>
+                                                </button>
+                                            )}
+                                            <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> <span className="">{content.user.username} :</span>
+                                        </h3>
                                         <p key={index} className="text-lg mt-2 shadow-2xl">{content.content}</p>
                                         
                                     </div>

@@ -136,6 +136,15 @@ router.post("/comments/add", async (req,res)=>{
     res.json(comments)
 })
 
+router.post("/comments/delete", async (req,res)=>{
+    const id = req.body.id
+    const manga = req.body.manga
+    
+    await CommentModel.deleteOne({_id:id})
+    const comments = await CommentModel.find({manga:manga}).populate("user")
+    res.json(comments)
+})
+
 router.post("/add", async (req, res)=>{
     const {Name,Img,Desc,Categorys,Browser} = req.body
     try {
