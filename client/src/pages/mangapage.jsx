@@ -111,6 +111,8 @@ export default function MangaPage(){
     }
 
     function SubmitComment(ev){
+        const btn = document.getElementById("btnsend")
+        btn.classList.add("disabled")
         ev.preventDefault()
         fetch("http://localhost:4000/manga/comments/add",{ 
             method:"POST",
@@ -118,6 +120,7 @@ export default function MangaPage(){
             headers: {'Content-Type':'application/json'},
             credentials: 'include',
         }).then(response => response.json()).then(data => setComments(data))
+        btn.classList.remove("disabled")
     }
 
     const myStyle = {
@@ -201,7 +204,7 @@ export default function MangaPage(){
                             {username && (
                                 <form onSubmit={SubmitComment} className="flex flex-wrap text-lg w-full">
                                     <input type="text" className="bg-transparent max-w-full border mr-2 p-2 flex-grow rounded-xl " placeholder="Yorum yap..." value={content} onChange={ev => setContent(ev.target.value)} />
-                                    <button className="border p-2 rounded-xl">Gönder</button>
+                                    <button className="border p-2 rounded-xl" id="btnsend">Gönder</button>
                                     <h3 className="mx-2 text-2xl mt-1 flex gap-1"> <img src={favicon} alt="" className="rounded-full w-10 h-10 border p-1" /> <span className="">{username}</span> </h3>
                                 </form>
                             )}
