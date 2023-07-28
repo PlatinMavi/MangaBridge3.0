@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
-export default function Manga({name,desc,image,browser}){
+export default function Popular({name,desc,image,browser}){
     return(
-        <Link to={`/manga/${browser}`} className=" md:mx-12  mx-6 font-mono ">
+        <Link to={`/manga/${browser}`} className="mx-12 font-mono ">
             <div className="flex relative min-w-xl lg:ml-0 md:ml-0 ml-10">
                 <img src={"http://localhost:4000/Collection/"+image} alt="" className="h-64 rounded-l-xl w-44 shadow-xl" />
                 <div className="bg-white bg-opacity-5 shadow-xl overflow-hidden backdrop-blur-sm h-64 p-4 text-right w-56 drop-shadow-lg rounded-r-xl absolute lg:left-3/4 md:left-3/4 left-1/2">

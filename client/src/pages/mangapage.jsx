@@ -136,10 +136,10 @@ export default function MangaPage(){
         <div className="font-mono min-h-screen text-white">
             <Header />
             <div className="container mx-auto mt-24">
-                <div className="grid gap-10 grid-cols-9">
-                    <div className="col-span-2">
+                <div className="grid gap-10 lg:grid-cols-9 grid-cols-1">
+                    <div className="lg:col-span-2 w-screen">
                         <div className=" bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
-                            <img src={"http://localhost:4000/Collection/"+Mmanga.image} alt="" className="rounded-xl"/>
+                            <img src={"http://localhost:4000/Collection/"+Mmanga.image} alt="" className="rounded-xl mx-auto"/>
                             <h3 className="w-max mx-auto mt-2">Kategoriler</h3>
                             <hr />
                             <div className="flex flex-wrap justify-center gap-4 my-4">
@@ -151,7 +151,7 @@ export default function MangaPage(){
                             {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
-                    <div className="col-span-7 ">
+                    <div className="lg:col-span-7 ">
                         <div className="bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
                             <h1 className="text-4xl"> 
                                 {Mmanga.name}
@@ -163,7 +163,7 @@ export default function MangaPage(){
                             <hr />
                             <div className="flex flex-wrap mt-2 gap-x-10 text-xl">
                                 <h4 className=" ">Mevcut Bölüm Sayısı: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Count}</span></h4>
-                                <div className="flex gap-4" >Çevirenler: 
+                                <div className="flex flex-wrap gap-x-4" >Çevirenler: 
                                     {Fansub && Fansub.map((Fansubs, index) => (
                                         <h4 key={index} className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Fansubs} </h4>
                                     ))}
@@ -173,10 +173,10 @@ export default function MangaPage(){
                                 Görüntülenme: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Mmanga.view}</span>
                             </h5>
                             <hr />
-                            <div className="grid grid-cols-4 gap-6">
+                            <div className="grid lg:grid-cols-4 grid-cols-2 gap-6 ">
                                 {Fansub && Fansub.map((Fansubs, index) => (
                                     <div key={index} className="font-bold text-center mt-6 rounded-2xl p-2 h-96 overflow-y-scroll no-scrollbar" style={myStyle}>
-                                        <h4>{Fansubs}</h4> <hr />
+                                        <h4 className="text-xl md:text-2xl">{Fansubs}</h4> <hr />
                                         {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
                                             (chapter, index) => (
                                                 <Link to={chapter.url} key={index}>
@@ -205,7 +205,7 @@ export default function MangaPage(){
                             
                         </div>
 
-                        <div className="comments bg-white shadow-xl bg-opacity-5 mt-8 backdrop-blur-sm text-3xl break-words font-mono  rounded-3xl drop-shadow-lg">
+                        <div className="comments bg-white shadow-xl bg-opacity-5 my-8 backdrop-blur-sm text-3xl break-words font-mono  rounded-3xl drop-shadow-lg">
                                 {comments && comments.map((content, index) => (
                                     <div className="p-4 flex border rounded-2xl mt-2 border-slate-500 flex-wrap">
                                         

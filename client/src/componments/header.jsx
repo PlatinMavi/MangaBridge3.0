@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../usercontext";
 import SearchBar from "./search";
@@ -8,6 +8,12 @@ import favicon from "../favicon.ico"
 export default function Header(){
 
     const {setUserInfo,userInfo} = useContext(UserContext);
+    const [showMenu, setShowMenu] = useState(false);
+
+    const handleMenuToggle = () => {
+      setShowMenu(!showMenu);
+    };
+
     useEffect(() =>{
       fetch('http://localhost:4000/profile', {
         credentials: 'include',
@@ -32,39 +38,95 @@ export default function Header(){
     const username = userInfo?.usernameStabilazed;
 
     return(
-        <header className=' flex justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono '>
-            <Link to="/" className="logo">MangaBridge</Link>
-            <nav className=' flex gap-4'>
-              <Link to="https://discord.gg/3bYYqP9Gzu" target="_blank">
-                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg" loading="lazy" alt="" className="mark-logos w-8 h-8 " />
-              </Link>
-              <Link to="/hakkinda" className="border px-2 rounded-xl">Hakkımızda & SSS</Link>
-              <Link to="/manga" className="border px-2 rounded-xl">Seriler</Link>
-              <Link to="/chapter" className="border px-2 rounded-xl">Yeni Eklenenler</Link>
-              <SearchBar/>
-
-                {username && (
-                    <>
-                        <div onClick={logout} className="logout cursor-pointer">Çıkış Yap</div>
-                        <Link to={"/profile"} className="profile flex gap-2">{username} <img src={favicon} alt="" className="rounded-full w-8 h-8 border p-1" /> </Link>
-                    </>
-                )}
-                {!username && (
-                    <>
-                        <Link to="/login" className="login ">Giriş Yap</Link>
-                        <Link to="/register" className="register ">Kayıt Ol</Link>
-                        
-                    </>
-                )}
-                {username==="admin" && (
-                    <>
-                        <Link to="/add" className="logo">Admin</Link>
-                    </>
-                )}
-                
-                
-
-            </nav>
-      </header>
+      <header className="flex md:flex-row lg:flex-row flex-col justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono">
+      <div className="flex justify-around h-max">
+        {/* MangaBridge logo */}
+        <Link to="/" className="logo h-max">
+          MangaBridge
+        </Link>
+        {/* Hamburger Menu (visible on small devices only) */}
+        <button
+          onClick={handleMenuToggle}
+          className={`burger-menu lg:hidden ml-auto h-max`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+      </div>
+      {/* Navigation links (hidden on small devices when showMenu is false) */}
+      <nav
+        className={`flex flex-col gap-4 lg:flex lg:flex-row ${
+          showMenu ? "mt-10" : "hidden"
+        }`}
+      >
+        {/* Social media link */}
+        <Link to="https://discord.gg/3bYYqP9Gzu" target="_blank">
+          <img
+            src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"
+            loading="lazy"
+            alt=""
+            className="mark-logos w-8 h-8"
+          />
+        </Link>
+        {/* Other navigation links */}
+        <Link to="/hakkinda" className="border px-2 rounded-xl">
+          Hakkımızda & SSS
+        </Link>
+        <Link to="/manga" className="border px-2 rounded-xl">
+          Seriler
+        </Link>
+        <Link to="/chapter" className="border px-2 rounded-xl">
+          Yeni Eklenenler
+        </Link>
+        <SearchBar />
+        {/* Logged-in user links */}
+        {username && (
+          <>
+            <div onClick={logout} className="logout cursor-pointer">
+              Çıkış Yap
+            </div>
+            <Link to={"/profile"} className="profile flex gap-2">
+              {username}{" "}
+              <img
+                src={favicon}
+                alt=""
+                className="rounded-full w-8 h-8 border p-1"
+              />{" "}
+            </Link>
+          </>
+        )}
+        {/* Guest user links */}
+        {!username && (
+          <>
+            <Link to="/login" className="login ">
+              Giriş Yap
+            </Link>
+            <Link to="/register" className="register ">
+              Kayıt Ol
+            </Link>
+          </>
+        )}
+        {/* Admin link */}
+        {username === "admin" && (
+          <>
+            <Link to="/add" className="logo">
+              Admin
+            </Link>
+          </>
+        )}
+      </nav>
+    </header>
     )
 }

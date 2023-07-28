@@ -37,15 +37,15 @@ export default function LoginPage(){
           <Header/>
           <div className="container mt-24 mx-auto ">
             <form onSubmit={login} className="w-max mx-auto p-12 flex flex-col gap-4 bg-slate-800 rounded-3xl">
-                <h1 className="font-bold text-3xl text-center">Login</h1>
+                <h1 className="font-bold text-3xl text-center">Giriş</h1>
 
-                <input type="text" placeholder="Username" name="username" id="username" className="p-2 bg-slate-900 rounded-xl"
+                <input type="text" placeholder="Kullanıcı Adı" name="username" id="username" className="p-2 bg-slate-900 rounded-xl"
                 value={username} onChange={ev => setUsername(ev.target.value)}/>
 
-                <input type="password" placeholder="Password" name="password" id="password" className="p-2 bg-slate-900 rounded-xl" 
+                <input type="password" placeholder="Şifre" name="password" id="password" className="p-2 bg-slate-900 rounded-xl" 
                 value={password} onChange={ev => setPassword(ev.target.value)}/>
 
-                <button type="submit" className="p-2 bg-slate-900 rounded-2xl">Submit</button>
+                <button type="submit" className="p-2 bg-slate-900 rounded-2xl">Giriş</button>
             </form>
           </div>
           
