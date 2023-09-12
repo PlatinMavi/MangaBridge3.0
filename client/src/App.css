@@ -53,7 +53,7 @@
   }
   
   .fire {
-    position: absolute;
+    position: flex;
     top: calc(50% );
     /* left: calc(50% - 50px); */
     width: 125px;
