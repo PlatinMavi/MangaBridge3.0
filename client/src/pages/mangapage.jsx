@@ -144,12 +144,12 @@ export default function MangaPage(){
 
 
     return(
-        <div className="font-mono min-h-screen text-white">
+        <div className="fredoka min-h-screen text-white">
             <Header />
             <div className="container mx-auto mt-24">
                 <div className="grid gap-10 lg:grid-cols-9 grid-cols-1">
                     <div className="lg:col-span-2 lg:w-auto w-screen">
-                        <div className=" bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
+                        <div className=" bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words fredoka p-4 rounded-3xl drop-shadow-lg">
                             <img src={"http://localhost:4000/Collection/"+Mmanga.image} alt="" className="rounded-xl mx-auto"/>
                             <h3 className="w-max mx-auto mt-2">Kategoriler</h3>
                             <hr />
@@ -163,7 +163,7 @@ export default function MangaPage(){
                         </div>
                     </div>
                     <div className="lg:col-span-7 ">
-                        <div className="bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
+                        <div className="bg-white shadow-xl bg-opacity-5 backdrop-blur-sm text-3xl break-words fredoka p-4 rounded-3xl drop-shadow-lg">
                             <h1 className="text-4xl"> 
                                 {Mmanga.name}
                             </h1>
@@ -200,7 +200,7 @@ export default function MangaPage(){
                             </div>
                         </div>
 
-                        <div className="comments bg-white shadow-xl bg-opacity-5 mt-8 backdrop-blur-sm text-3xl break-words font-mono p-4 rounded-3xl drop-shadow-lg">
+                        <div className="comments bg-white shadow-xl bg-opacity-5 mt-8 backdrop-blur-sm text-3xl break-words fredoka p-4 rounded-3xl drop-shadow-lg">
                             {username && (
                                 <form onSubmit={SubmitComment} className="flex flex-wrap text-lg w-full">
                                     <input type="text" className="bg-transparent max-w-full border mr-2 p-2 flex-grow rounded-xl " placeholder="Yorum yap..." value={content} onChange={ev => setContent(ev.target.value)} />
@@ -216,7 +216,7 @@ export default function MangaPage(){
                             
                         </div>
 
-                        <div className="comments bg-white shadow-xl bg-opacity-5 my-8 backdrop-blur-sm text-3xl break-words font-mono  rounded-3xl drop-shadow-lg">
+                        <div className="comments bg-white shadow-xl bg-opacity-5 my-8 backdrop-blur-sm text-3xl break-words fredoka  rounded-3xl drop-shadow-lg">
                                 {comments && comments.map((content, index) => (
                                     <div className="p-4 flex border rounded-2xl mt-2 border-slate-500 flex-wrap">
                                         

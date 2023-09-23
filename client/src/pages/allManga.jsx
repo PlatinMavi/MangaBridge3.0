@@ -34,10 +34,10 @@ export default function AllManga(){
     }
 
     return(
-        <main className=' font-mono text-white'>
+        <main className=' fredoka text-white'>
             <Header />
             <h1 className="text-4xl md:text-6xl w-max mx-auto mt-24 font-bold">Bütün Mangalar</h1>
-            <div className="container flex flex-wrap gap-x-24 md:-translate-x-0 -translate-x-7 gap-y-4 my-12 mx-auto ">
+            <div className="container flex flex-wrap gap-y-4 my-12 mx-auto justify-center ">
                 {Mmanga.length > 0 && Mmanga.map(manga =>(
             
                    <Manga key={manga._id} {...manga} />
@@ -48,7 +48,7 @@ export default function AllManga(){
             </div>  
             <div className="flex justify-center my-8">
                 {total > page &&(
-                    <button onClick={GetMore} className="w-1/2 bg-white bg-opacity-5 backdrop-blur-sm border py-3 text-3xl break-words text-center font-mono p-4 rounded-3xl drop-shadow-lg">Daha Fazla</button>
+                    <button onClick={GetMore} className="w-1/2 bg-white bg-opacity-5 backdrop-blur-sm border py-3 text-3xl break-words text-center fredoka p-4 rounded-3xl drop-shadow-lg">Daha Fazla</button>
                 )}
             </div>
         </main>

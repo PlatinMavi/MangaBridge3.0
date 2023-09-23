@@ -25,7 +25,7 @@ export default function RegisterPage(){
         return <Navigate to={'/login'} />}
 
     return(
-        <main className=' text-white h-screen'>
+        <main className='fredoka text-white h-screen'>
           <Header/>
           <div className="container mt-24 mx-auto ">
             <form onSubmit={register} className="w-max mx-auto p-12 flex flex-col gap-4 bg-slate-800 rounded-3xl">

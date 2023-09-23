@@ -7,7 +7,7 @@ export default function AboutUsPage(){
         <main className="">
             <Header />
             <section className=" mt-12">
-            <div className="py-8 px-4 mx-auto max-w-screen-xl font-mono sm:py-16 lg:px-6">
+            <div className="py-8 px-4 mx-auto max-w-screen-xl fredoka sm:py-16 lg:px-6">
                 <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-white">Sıkça Sorulan Sorular</h2>
                 <div className="grid pt-8 text-left border-t border-gray-200 md:gap-16 dark:border-gray-700 md:grid-cols-2">
                     <div>

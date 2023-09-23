@@ -38,7 +38,7 @@ export default function Header(){
     const username = userInfo?.usernameStabilazed;
 
     return(
-      <header className="flex md:flex-row lg:flex-row flex-col justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg font-mono">
+      <header className="flex md:flex-row lg:flex-row flex-col justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg fredoka">
       <div className="flex justify-around h-max">
         {/* MangaBridge logo */}
         <Link to="/" className="logo h-max">

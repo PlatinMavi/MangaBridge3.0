@@ -88,7 +88,7 @@ export default function MangaAdd(){
         return <Navigate to={'/'} />}
 
     return(
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen bg-gray-900 fredoka">
             <Header/>
             <form onSubmit={submitManga} className="flex gap-4 mx-auto w-max mt-12" >
                 <input type="text" placeholder="Name" value={Name} onChange={ev => setName(ev.target.value)}/>

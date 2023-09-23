@@ -33,10 +33,10 @@ export default function AllChapter(){
     }
 
     return(
-        <main className='font-mono min-h-screen text-white'>
+        <main className='fredoka min-h-screen text-white'>
             <Header />
             <h1 className="text-4xl md:text-6xl w-max mx-auto mt-24 font-bold">En Son Eklenenler</h1>
-            <div className="container flex flex-wrap gap-x-24 md:-translate-x-0 -translate-x-7 gap-y-4 my-12 mx-auto ">
+            <div className="container flex flex-wrap justify-center gap-y-4 my-12 mx-auto ">
                 {Chapter.length > 0 && Chapter.map(c =>(
             
                    <Lasttw key={c._id} {...c} />
@@ -45,7 +45,7 @@ export default function AllChapter(){
             </div>
             <div className="flex justify-center my-8">
                 {total > page &&(
-                    <button onClick={GetMore} className="w-1/2 bg-white bg-opacity-5 backdrop-blur-sm border py-3 text-3xl break-words text-center font-mono p-4 rounded-3xl drop-shadow-lg">Daha Fazla</button>
+                    <button onClick={GetMore} className="w-1/2 bg-white bg-opacity-5 backdrop-blur-sm border py-3 text-3xl break-words text-center fredoka p-4 rounded-3xl drop-shadow-lg">Daha Fazla</button>
                 )}
             </div>
             

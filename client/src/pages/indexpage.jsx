@@ -30,12 +30,12 @@ export default function IndexPage(){
 
       <main className=" text-white">
         <Header />
-          <div className="container flex flex-wrap lg:pl-10 md:pl-10 pl-4 my-24 mx-auto font-mono ">
-            <div className="flex flex-wrap">
+          <div className="container my-24 mx-auto fredoka ">
+            <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center">
               <div className="w-max">
                 
-                <h1 className="lg:text-8xl md:text-6xl text-6xl font-bold from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent">MangaBridge</h1><br /><h2 className=" md:text-5xl text-3xl break-words max-w-2xl">Bütün Mangalarınızın <br />Buluştuğu yer</h2>
-                <div className=" mt-24">
+                <h1 className="lg:text-8xl md:text-6xl text-5xl font-bold from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent">MangaBridge</h1><br /><h2 className=" md:text-5xl text-3xl break-words max-w-2xl">Bütün Mangalarınızın <br />Buluştuğu yer</h2>
+                <div className=" mt-24 lg:mt-32 -translate-x-6">
                   <div className="fire translate-x-5">
                     <div className="fire-left">
                       <div className="main-fire"></div>
@@ -56,10 +56,10 @@ export default function IndexPage(){
                 </div>
               </div>
             
-              <div className="lg:ml-16 lg:mt-0 mt-24">
+              <div className="ml-0 lg:ml-20 lg:mt-0 mt-12">
                 <h1 className="text-center break-words w-3/4 mx-auto text-3xl mb-2">Mangabridgede En Çok Okunanlar</h1>
-                <div className="max-w-2xl ">
-                  <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-x-24 -translate-x-20 gap-y-4">
+                <div className="max-w-2xl">
+                  <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-y-4">
                     {topmanga.length > 0 && topmanga.map(manga =>(
                     
                       <Popular key={manga._id} {...manga} />
@@ -74,19 +74,19 @@ export default function IndexPage(){
 
           {/* Last uploaded mangas */}
           <div className=" ">
-            <div className="container md:pl-10 lg:pl-10 pl-9 p-4 mx-auto mt-12 ">
-                <h3 className="text-4xl font-mono font-bold my-4">Son Yüklemeler:</h3>
-                <div className="flex flex-wrap -translate-x-16 gap-y-4 gap-x-24">
-                  <Link className="-translate-x-2 md:-translate-x-0 scale-95 md:scale-100" style={{width:272}} to="/chapter">
-                    <div  className="bg-white shadow-xl bg-opacity-5 backdrop-blur-xs h-64 text-3xl break-words text-center font-mono p-4 rounded-3xl drop-shadow-lg translate-x-12" style={{width:356}}>
-                      <p className="mt-12">Bana Tüm Son Yüklemeleri Göster</p>
+            <div className=" container p-4 mx-auto mt-12 ">
+                <h3 className="text-4xl fredoka text-center sm:text-left font-bold my-4">Son Yüklemeler:</h3>
+                <div className="flex flex-wrap justify-center gap-y-4">
+                  <Link className="scale-90 sm:scale-100" to="/chapter">
+                    <div  className="rounded-2xl bg-white bg-opacity-5 shadow-xl overflow-hidden backdrop-blur-sm p-4 text-right drop-shadow-lg mx-6 h-64" style={{width:320}}>
+                      <p className=" text-center text-3xl mt-16 fredoka">Bana Tüm Son Yüklemeleri Göster</p>
                     </div>
                   </Link>
-                    {lasttw.length > 0 && lasttw.map(manga =>(
-                      
-                      <Lasttw key={manga._id} {...manga} />
-                  
-                    ))}
+                  {lasttw.length > 0 && lasttw.map(manga =>(
+                    
+                    <Lasttw key={manga._id} {...manga} />
+                
+                  ))}
                 </div>
             </div>
           </div>
