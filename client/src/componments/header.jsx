@@ -41,7 +41,7 @@ export default function Header(){
       <header className="flex md:flex-row lg:flex-row flex-col justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg fredoka">
       <div className="flex justify-around h-max">
         {/* MangaBridge logo */}
-        <Link to="/" className="logo h-max">
+        <Link to="/" className="logo text-2xl h-max">
           MangaBridge
         </Link>
         {/* Hamburger Menu (visible on small devices only) */}
@@ -81,23 +81,23 @@ export default function Header(){
           />
         </Link>
         {/* Other navigation links */}
-        <Link to="/hakkinda" className="border px-2 rounded-xl">
+        <Link to="/hakkinda" className="px-2 font-thin text-2xl link link-underline link-underline-black">
           Hakkımızda & SSS
         </Link>
-        <Link to="/manga" className="border px-2 rounded-xl">
+        <Link to="/manga" className="px-2 font-thin text-2xl link link-underline link-underline-black">
           Seriler
         </Link>
-        <Link to="/chapter" className="border px-2 rounded-xl">
+        <Link to="/chapter" className="px-2 font-thin text-2xl link link-underline link-underline-black">
           Yeni Eklenenler
         </Link>
         <SearchBar />
         {/* Logged-in user links */}
         {username && (
           <>
-            <div onClick={logout} className="logout cursor-pointer">
+            <div onClick={logout} className="logout cursor-pointer font-thin text-2xl link link-underline link-underline-black">
               Çıkış Yap
             </div>
-            <Link to={"/profile"} className="profile flex gap-2">
+            <Link to={"/profile"} className="profile flex gap-2 font-thin text-2xl link link-underline link-underline-black">
               {username}{" "}
               <img
                 src={favicon}
@@ -110,10 +110,10 @@ export default function Header(){
         {/* Guest user links */}
         {!username && (
           <>
-            <Link to="/login" className="login ">
+            <Link to="/login" className="login font-thin text-2xl link link-underline link-underline-black">
               Giriş Yap
             </Link>
-            <Link to="/register" className="register ">
+            <Link to="/register" className="register font-thin text-2xl link link-underline link-underline-black">
               Kayıt Ol
             </Link>
           </>
@@ -121,7 +121,7 @@ export default function Header(){
         {/* Admin link */}
         {username === "admin" && (
           <>
-            <Link to="/add" className="logo">
+            <Link to="/add" className="logo font-thin text-2xl link link-underline link-underline-black">
               Admin
             </Link>
           </>

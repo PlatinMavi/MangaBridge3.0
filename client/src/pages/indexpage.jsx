@@ -34,7 +34,7 @@ export default function IndexPage(){
             <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center">
               <div className="w-max">
                 
-                <h1 className="lg:text-8xl md:text-6xl text-5xl font-bold from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent">MangaBridge</h1><br /><h2 className=" md:text-5xl text-3xl break-words max-w-2xl">Bütün Mangalarınızın <br />Buluştuğu yer</h2>
+                <h1 className="lg:text-8xl md:text-6xl text-5xl font-bold from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent text-[#867865]">MangaBridge</h1><br /><h2 className=" md:text-5xl text-3xl break-words max-w-2xl">Bütün Mangalarınızın <br />Buluştuğu yer</h2>
                 <div className=" mt-24 lg:mt-32 -translate-x-6">
                   <div className="fire translate-x-5">
                     <div className="fire-left">
@@ -56,7 +56,7 @@ export default function IndexPage(){
                 </div>
               </div>
             
-              <div className="ml-0 lg:ml-20 lg:mt-0 mt-12">
+              <div className="ml-0 lg:ml-20 lg:mt-0 mt-32">
                 <h1 className="text-center break-words w-3/4 mx-auto text-3xl mb-2">Mangabridgede En Çok Okunanlar</h1>
                 <div className="max-w-2xl">
                   <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-y-4">

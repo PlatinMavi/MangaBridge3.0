@@ -47,7 +47,7 @@ router.get('/profile', (req,res) => {
     const {token} = req.cookies;
     jwt.verify(token, JWTsecret, {}, (err,info) => {
       if (err){res.status(200).json("")};
-      res.json(info);
+    //   res.json(info);
     });
   });
 

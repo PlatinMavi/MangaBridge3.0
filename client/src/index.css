@@ -5,7 +5,7 @@
 body {
   margin: 0;
 
-  background-color: rgb(15 23 42);
+  background-color: #0b0c0f;
   /* font-family: 'Kablammo', cursive; */
   background-image:  linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 3em 3em;

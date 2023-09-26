@@ -47,7 +47,7 @@ export default function SearchBar() {
         
       </div>
       {searchResults.length > 0 &&
-        <div className="results p-4 m-4 -translate-x-2 bg-slate-900 shadow-2xl rounded-3xl absolute">
+        <div className="results p-4 m-4 -translate-x-2 bg-[#0b0c0f] bg-opacity-90 shadow-2xl rounded-3xl absolute">
             {searchResults.length > 0 &&
             searchResults.map((manga) => (
               <Link to={"/manga/"+manga.browser} >

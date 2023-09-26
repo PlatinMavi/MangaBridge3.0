@@ -86,7 +86,7 @@ export default function MangaPage(){
         if(isSaved === true){
             document.getElementById("save").innerHTML = "Kaydedildi"
             document.getElementById("save").classList.add("bg-red-600")
-            document.getElementById("save").classList.remove("bg-slate-900")
+            document.getElementById("save").classList.remove("bg-[#0b0c0f]")
         }
     },[isSaved])
 
@@ -101,11 +101,11 @@ export default function MangaPage(){
         if (Status === true){
             document.getElementById("save").innerHTML = "Kaydedildi"
             document.getElementById("save").classList.add("bg-red-600")
-            document.getElementById("save").classList.remove("bg-slate-900")
+            document.getElementById("save").classList.remove("bg-[#0b0c0f]")
         }else if(Status === false){
             document.getElementById("save").innerHTML = "Kaydet"
             document.getElementById("save").classList.remove("bg-red-600")
-            document.getElementById("save").classList.add("bg-slate-900")
+            document.getElementById("save").classList.add("bg-[#0b0c0f]")
         }
         
     }
@@ -124,7 +124,7 @@ export default function MangaPage(){
     }
 
     const myStyle = {
-        backgroundColor: 'rgb(15, 23, 42)',
+        backgroundColor: '#0b0c0f',
         backgroundImage:
           'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
         backgroundSize: '1em 1em',
@@ -158,7 +158,7 @@ export default function MangaPage(){
                                 <h5 key={index} className="text-lg shadow-2xl">{category}</h5>
                             ))}
                             </div>
-                            {username &&(<button onClick={()=> {Kaydet(userInfo.id,Mmanga._id)} } className="w-full rounded-xl text-xl p-2 bg-slate-900" id="save">Kaydet</button>)}
+                            {username &&(<button onClick={()=> {Kaydet(userInfo.id,Mmanga._id)} } className="w-full rounded-xl text-xl p-2 bg-[#0b0c0f]" id="save">Kaydet</button>)}
                             {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
@@ -173,15 +173,15 @@ export default function MangaPage(){
                             </h3>
                             <hr />
                             <div className="flex flex-wrap mt-2 gap-x-10 text-xl">
-                                <h4 className=" ">Mevcut Bölüm Sayısı: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Count}</span></h4>
+                                <h4 className=" ">Mevcut Bölüm Sayısı: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold text-[#867865]">{Count}</span></h4>
                                 <div className="flex flex-wrap gap-x-4" >Çevirenler: 
                                     {Fansub && Fansub.map((Fansubs, index) => (
-                                        <h4 key={index} className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Fansubs} </h4>
+                                        <h4 key={index} className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold text-[#867865]">{Fansubs} </h4>
                                     ))}
                                 </div>
                             </div>
                             <h5 className="text-xl mt-4"> 
-                                Görüntülenme: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold">{Mmanga.view}</span>
+                                Görüntülenme: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold text-[#867865]">{Mmanga.view}</span>
                             </h5>
                             <hr />
                             <div className="grid lg:grid-cols-4 grid-cols-2 gap-6 ">
