@@ -9,7 +9,7 @@ const path = require('path');
 const app = express()
 app.use("Collection",express.static(path.join(__dirname, 'Collection')))
 
-app.use(cors({credentials:true,origin:"http://localhost:3000"}))
+app.use(cors({credentials:true,origin:"https://mangabridge.vercel.app/", methods:["GET","POST"]}))
 app.use(express.json())
 app.use(cookieParser())
 // middleware
