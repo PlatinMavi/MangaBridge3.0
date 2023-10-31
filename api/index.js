@@ -28,6 +28,9 @@ app.get("/Collection/:ad", (req,res)=>{
     }catch{}
 })
 
+app.get("/",(req,res)=>{
+    res.json("Welcome to MangaBridge API !")
+})
 
 mongoose.connect(process.env.DB_URI)
 const connection = mongoose.connection
