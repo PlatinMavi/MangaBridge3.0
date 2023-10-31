@@ -10,10 +10,9 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required: true,
     },
-    salt:{
-        type:String,
-        required:true
-    },
+    // salt:{
+    //     type:String,
+    // },
     saved:[{
         type: mongoose.Schema.Types.ObjectId,
          ref: 'Manga'

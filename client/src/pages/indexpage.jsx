@@ -33,8 +33,8 @@ export default function IndexPage(){
           <div className="container my-24 mx-auto fredoka ">
             <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center">
               <div className="w-max">
-                
-                <h1 className="lg:text-8xl md:text-6xl text-5xl font-bold from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent text-[#867865]">MangaBridge</h1><br /><h2 className=" md:text-5xl text-3xl break-words max-w-2xl">Bütün Mangalarınızın <br />Buluştuğu yer</h2>
+                {/* from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent */}
+                <h1 className="lg:text-8xl md:text-6xl text-5xl font-bold  text-[#867865]">MangaBridge</h1><br /><h2 className=" md:text-5xl text-3xl break-words max-w-2xl">Bütün Mangalarınızın <br />Buluştuğu yer</h2>
                 <div className=" mt-24 lg:mt-32 -translate-x-6">
                   <div className="fire translate-x-5">
                     <div className="fire-left">

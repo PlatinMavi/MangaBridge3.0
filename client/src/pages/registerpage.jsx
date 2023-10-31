@@ -9,7 +9,7 @@ export default function RegisterPage(){
 
     async function register(ev){
         ev.preventDefault()
-        const response = await fetch("http://localhost:4000/register",{
+        const response = await fetch("http://localhost:4000/user/register",{
             method:"POST",
             body: JSON.stringify({username, password}),
             headers: {"Content-Type":"application/json"}
@@ -28,16 +28,16 @@ export default function RegisterPage(){
         <main className='fredoka text-white h-screen'>
           <Header/>
           <div className="container mt-24 mx-auto ">
-            <form onSubmit={register} className="w-max mx-auto p-12 flex flex-col gap-4 bg-slate-800 rounded-3xl">
+            <form onSubmit={register} className="w-max mx-auto p-12 flex flex-col gap-4 border border-white rounded-3xl">
                 <h1 className="font-bold text-3xl text-center">Kayıt Ol</h1>
 
-                <input type="text" placeholder="Kullanıcı Adı" className="p-2 bg-slate-900 rounded-xl"
+                <input type="text" placeholder="Kullanıcı Adı" className="p-2 bg-transparent border border-white rounded-xl"
                 value={username} onChange={ev => setUsername(ev.target.value)}/>
 
-                <input type="password" placeholder="Şifre" className="p-2 bg-slate-900 rounded-xl" 
+                <input type="password" placeholder="Şifre" className="p-2 bg-transparent border border-white rounded-xl" 
                 value={password} onChange={ev => setPassword(ev.target.value)}/>
 
-                <button type="submit" className="p-2 bg-slate-900 rounded-2xl">Kayıt Ol</button>
+                <button type="submit" className="p-2 bg-black border border-white rounded-2xl">Kayıt Ol</button>
             </form>
           </div>
           

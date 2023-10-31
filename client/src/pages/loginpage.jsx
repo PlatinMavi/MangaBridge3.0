@@ -13,7 +13,7 @@ export default function LoginPage(){
 
   async function login(ev) {
     ev.preventDefault();
-    const response = await fetch('http://localhost:4000/login', {
+    const response = await fetch('http://localhost:4000/user/login', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},
@@ -36,16 +36,16 @@ export default function LoginPage(){
         <main className=' text-white h-screen fredoka'>
           <Header/>
           <div className="container mt-24 mx-auto ">
-            <form onSubmit={login} className="w-max mx-auto p-12 flex flex-col gap-4 bg-slate-800 rounded-3xl">
+            <form onSubmit={login} className="w-max mx-auto p-12 flex flex-col gap-4 border border-white rounded-3xl">
                 <h1 className="font-bold text-3xl text-center">Giriş</h1>
 
-                <input type="text" placeholder="Kullanıcı Adı" name="username" id="username" className="p-2 bg-slate-900 rounded-xl"
+                <input type="text" placeholder="Kullanıcı Adı" name="username" id="username" className="p-2  rounded-xl bg-transparent border border-white"
                 value={username} onChange={ev => setUsername(ev.target.value)}/>
 
-                <input type="password" placeholder="Şifre" name="password" id="password" className="p-2 bg-slate-900 rounded-xl" 
+                <input type="password" placeholder="Şifre" name="password" id="password" className="p-2  rounded-xl bg-transparent border border-white" 
                 value={password} onChange={ev => setPassword(ev.target.value)}/>
 
-                <button type="submit" className="p-2 bg-slate-900 rounded-2xl">Giriş</button>
+                <button type="submit" className="p-2 bg-black rounded-2xl border border-white">Giriş</button>
             </form>
           </div>
           

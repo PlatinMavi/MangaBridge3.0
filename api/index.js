@@ -9,7 +9,7 @@ const path = require('path');
 const app = express()
 app.use("Collection",express.static(path.join(__dirname, 'Collection')))
 
-app.use(cors({credentials:true,origin:"https://mangabridge.vercel.app/", methods:["GET","POST"]}))
+app.use(cors({credentials:true,origin:"http://localhost:3000", methods:["GET","POST"]}))
 app.use(express.json())
 app.use(cookieParser())
 // middleware
@@ -18,7 +18,7 @@ const userRoutes = require("./routes/User")
 const mangaRoutes = require("./routes/Manga")
 const chapterRoutes  = require("./routes/Chapter")
 
-app.use("/",userRoutes)
+app.use("/user",userRoutes)
 app.use("/manga", mangaRoutes)
 app.use("/chapter", chapterRoutes)
 

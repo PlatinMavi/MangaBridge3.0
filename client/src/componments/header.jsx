@@ -15,7 +15,7 @@ export default function Header(){
     };
 
     useEffect(() =>{
-      fetch('http://localhost:4000/profile', {
+      fetch('http://localhost:4000/user/profile', {
         credentials: 'include',
         headers: {'Content-Type':'application/json'},
       }).then(response => {
@@ -26,7 +26,7 @@ export default function Header(){
     }, []);
   
     function logout() {
-      fetch('http://localhost:4000/logout', {
+      fetch('http://localhost:4000/user/logout', {
         credentials: 'include',
         method: 'POST',
       }).then(
@@ -35,7 +35,7 @@ export default function Header(){
       ;
     }
   
-    const username = userInfo?.usernameStabilazed;
+    const username = userInfo?.username;
 
     return(
       <header className="flex md:flex-row lg:flex-row flex-col justify-between font-bold text-xl w-full z-50 text-white fixed top-0 p-4 bg-white bg-opacity-5 backdrop-blur-sm drop-shadow-lg fredoka">
