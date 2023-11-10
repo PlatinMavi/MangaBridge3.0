@@ -30,7 +30,7 @@ export default function Header(){
         credentials: 'include',
         method: 'POST',
       }).then(
-        setUserInfo(null)
+        setUserInfo("")
       )
       ;
     }

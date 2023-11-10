@@ -23,7 +23,7 @@ export default function ProfilePage(){
       .then(response => response.json()).then(data => setMangas(data))
     }
 
-    const username = userInfo?.usernameStabilazed;
+    const username = userInfo?.username;
 
     return(
         <>

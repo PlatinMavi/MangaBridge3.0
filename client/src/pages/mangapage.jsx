@@ -19,6 +19,8 @@ export default function MangaPage(){
 
     const [comments, setComments] = useState([])
     const [content,setContent] = useState("")
+    const [reader,setReader] = useState(false)
+
 
     useEffect(() => {
 
@@ -140,7 +142,7 @@ export default function MangaPage(){
     }
     
 
-    const username = userInfo?.usernameStabilazed;
+    const username = userInfo?.username;
 
 
     return(
@@ -159,7 +161,7 @@ export default function MangaPage(){
                             ))}
                             </div>
                             {username &&(<button onClick={()=> {Kaydet(userInfo.id,Mmanga._id)} } className="w-full rounded-xl text-xl p-2 bg-[#0b0c0f]" id="save">Kaydet</button>)}
-                            {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600">Kaydetmek için giriş yapınız</button>)}
+                            {!username &&(<button disabled className="w-full rounded-xl text-lg p-2 bg-red-600" id="save">Kaydetmek için giriş yapınız</button>)}
                         </div>
                     </div>
                     <div className="lg:col-span-7 ">
@@ -184,19 +186,39 @@ export default function MangaPage(){
                                 Görüntülenme: <span className="from-purple-600 to-teal-600 bg-gradient-to-r bg-clip-text text-transparent font-bold text-[#867865]">{Mmanga.view}</span>
                             </h5>
                             <hr />
-                            <div className="grid lg:grid-cols-4 grid-cols-2 gap-6 ">
-                                {Fansub && Fansub.map((Fansubs, index) => (
-                                    <div key={index} className="font-bold text-center mt-6 rounded-2xl p-2 h-96 overflow-y-scroll no-scrollbar" style={myStyle}>
-                                        <h4 className="text-xl md:text-2xl">{Fansubs}</h4> <hr />
-                                        {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
-                                            (chapter, index) => (
-                                                <Link to={chapter.url} key={index}>
-                                                    <div className="text-2xl w-full p-2 my-2 bg-white shadow-xl bg-opacity-5 backdrop-blur-sm drop-shadow-lg rounded-xl"  >{chapter.number}. Bölüm</div>
-                                                </Link>
-                                            )
-                                        )}
+                            <div className=" ">
+                                {reader &&
+                                    <div className="grid lg:grid-cols-4 grid-cols-2 gap-6">
+                                        {Fansub && Fansub.map((Fansubs, index) => (
+                                            <div key={index} className="font-bold text-center mt-6 rounded-2xl p-2 h-96 overflow-y-scroll no-scrollbar" style={myStyle}>
+                                                <h4 className="text-xl md:text-2xl">{Fansubs}</h4> <hr />
+                                                {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
+                                                    (chapter, index) => (
+                                                        <Link to={`/manga/read/${(chapter.url).replace(/\/+/g,"*")}`} key={index}>
+                                                            <div className="text-2xl w-full p-2 my-2 bg-[#191c1c] shadow-xl rounded-xl"  >{chapter.number}. Bölüm</div>
+                                                        </Link>
+                                                    )
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
+                                }
+                                {!reader &&
+                                    <div className="grid lg:grid-cols-4 grid-cols-2 gap-6">
+                                    {Fansub && Fansub.map((Fansubs, index) => (
+                                        <div key={index} className="font-bold text-center mt-6 rounded-2xl p-2 h-96 overflow-y-scroll no-scrollbar" style={myStyle}>
+                                            <h4 className="text-xl md:text-2xl">{Fansubs}</h4> <hr />
+                                            {Chapter.filter((chapter) => chapter.fansub === Fansubs).map(
+                                                (chapter, index) => (
+                                                    <Link to={chapter.url}>
+                                                        <div className="text-2xl w-full p-2 my-2 bg-[#191c1c] shadow-xl rounded-xl"  >{chapter.number}. Bölüm</div>
+                                                    </Link>
+                                                )
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                }
                             </div>
                         </div>
 

@@ -11,6 +11,7 @@ import AllManga from './pages/allManga';
 import AllChapter from './pages/allChapter';
 import ProfilePage from './pages/profile';
 import AboutUsPage from './pages/aboutus';
+import ReadPage from './pages/readpage';
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
         <Route path={"/profile"} element={<ProfilePage/>} />
 
         <Route path={"/hakkinda"} element={<AboutUsPage/>}/>
+
+        <Route path={"/manga/read/:link"} element={<ReadPage/>}/>
 
       </Routes>
     </UserContextProvider>
